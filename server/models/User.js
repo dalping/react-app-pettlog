@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const userSchema = mongoose.Schema({ //스키마 정의 생성자 구조만 정의 함
     name: {
         type: String,
+        maxlength: 50
     },
     email: {
         type: String,
@@ -95,6 +96,6 @@ userSchema.statics.findByToken = function(token, cb) {
 }
 
 //mongoose.model(modelName, schema); 스키마 정의 사용
-const User = mongoose.model('User', userSchema,"userinfo") //컬렉션 지정
+const User = mongoose.model('User', userSchema) //컬렉션 지정
 
 module.exports = {User} 

@@ -1,8 +1,9 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch,Route} from "react-router-dom";
 
-import LandingPage from './components/views/LandingPage/LandingPage';
+import LandingPage from './components/views/MainPage/MainPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
+import MainPage from './components/views/MainPage/MainPage';
 import NavBar from './components/views/NavBar/NavBar';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 // import MyPage from './components/views/MyPage/MyPage';
@@ -14,7 +15,7 @@ function App() {
       <div>
         <NavBar/>
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/" component={Auth(MainPage, null)} />
           {/* <Route exact path="/mypage" component={Auth(MyPage, true)} /> */}
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
