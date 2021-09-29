@@ -5,6 +5,7 @@ const port = 5000
 const cookieParser = require('cookie-parser')
 const bodyParder = require('body-parser')
 const {User} = require('./models/User');
+const {Post} = require('./models/Post');
 //, useCreateIndex: true, useFindAndModify: false
  const config = require('./config/key')
 //application/x-www-form-urlencoded 분석
@@ -94,6 +95,26 @@ app.get('/api/users/logout', auth, (req, res) => {
         return res.status(200).send({
           success: true
         })
+    })
+  })
+
+  app.get('/api/import/post', (req, res) => {
+    Post.find() //비디오 콜렉션의 모든 비디오 불러옴
+    .populate('writer')
+    .exec((err, posts) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({success:true, posts})
+    })
+  })
+
+  app.post('/api/upload/post', (req, res)=>{
+
+    const post = new Post(req.body)
+    console.log('hello')
+    
+    post.save((err,doc) => { //save to mongoDB
+        if(err) return res.json({success:false, err})
+        res.status(200).json({success:true})
     })
   })
 

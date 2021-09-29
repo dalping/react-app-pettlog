@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
+.content{
+  display: flex;
+  flex-direction: column;
+}
+
+.writer{
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+}
+
 .post{
   display: flex;
   border-bottom: 1px solid black;
@@ -36,6 +46,7 @@ code {
   height:360px ;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .icon{
@@ -63,6 +74,3 @@ code {
   font-size: 0.7rem;
 }
 
-.p{
-  margin-bottom: 0;
-}

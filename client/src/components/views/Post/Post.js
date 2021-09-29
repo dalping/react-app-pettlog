@@ -5,22 +5,22 @@ import {
     RetweetOutlined
   } from '@ant-design/icons';
 
-function Post() {
+function Post(props) {
+    //console.log(props.post)
+    const date = props.post.createdAt
+    console.log(date)
+
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
             <div className="post">
                 <div className="photo">
                     image
                 </div>
-                <div style={{'width':'300px','height':'300px','padding':'15px'}}>
-                    <p className="title">추적추적 비가 내린다</p>
-                    <p className="writer">romini</p>
-                    <hr/>
-                    <p>새벽에 빗소리 들으며 코딩하니 기분이 정말 좋다 ㅎㅎ
-
-                        이런게 행복인가 싶다!
-                    </p>
-                    <p className="date">2022.10.02 Fri</p>
+                <div className="content" style={{'width':'300px','height':'300px','padding':'15px'}}>
+                    <span className="title">{props.post.title}</span>
+                    <span className="writer">{props.post.writer.name}</span>
+                    <div>{props.post.content}</div>
+                    <span className="date" style={{'justifySelf':'flex-end'}}>{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
             <div className="option">

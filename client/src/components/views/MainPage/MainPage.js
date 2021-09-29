@@ -1,17 +1,39 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {withRouter} from  'react-router-dom';
+import { Button } from 'antd';
+import { useHistory } from 'react-router';
+import axios from 'axios';
 import Post from '../Post/Post';
 
-function LandingPage(props) {
+function MainPage(props) {
+
+    const [Posts, setPosts] = useState([])
+
+    let history = useHistory();
+
+    useEffect(() => {
+        axios.get('/api/import/post')
+        .then(res => {
+            if(res.data.success){
+                setPosts(res.data.posts)
+                console.log(Posts)
+            }else{
+                alert('fail to load Post')
+            }
+        })
+    }, [])
 
     return (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center',width:'100%',height:'100vh'}}>
-            <div className="posts">
-                <Post/>
+        <div style={{'padding':'20px'}}>
+            <div className="posts" style={{display:'flex', flexDirection:'column'}}>
+                {Posts.map((data,idx)=>(
+                    <Post key={idx} post={data}/>
+                ))}
             </div>
+            <Button type="primary" onClick={()=>{history.push('/write')}}>Write</Button>
         </div>
     )
 }
 
-export default withRouter(LandingPage)
+export default withRouter(MainPage)
 
