@@ -24,13 +24,13 @@ function MainPage(props) {
     }, [])
 
     return (
-        <div style={{'padding':'20px'}}>
+        <div style={{padding:'20px', paddingTop:'76px'}}>
+            <Button style={{marginBottom:'20px'}}type="primary" onClick={()=>{history.push('/write')}}>Write</Button>
             <div className="posts" style={{display:'flex', flexDirection:'column'}}>
                 {Posts.map((data,idx)=>(
                     <Post key={idx} post={data}/>
                 ))}
             </div>
-            <Button type="primary" onClick={()=>{history.push('/write')}}>Write</Button>
         </div>
     )
 }

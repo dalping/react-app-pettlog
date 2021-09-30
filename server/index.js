@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const bodyParder = require('body-parser')
 const {User} = require('./models/User');
 const {Post} = require('./models/Post');
+const multer = require('multer');
 //, useCreateIndex: true, useFindAndModify: false
  const config = require('./config/key')
 //application/x-www-form-urlencoded 분석
@@ -116,6 +117,32 @@ app.get('/api/users/logout', auth, (req, res) => {
         if(err) return res.json({success:false, err})
         res.status(200).json({success:true})
     })
+  })
+
+  let storage = multer.diskStorage({
+      destination:(req, file, cb) => {
+        cb(null, "uploads/");
+      },
+      filename:(req,file,cb) =>{
+        cb(null, `${Date.now()}_${file.originalname}`);
+      },
+      fileFileter:(req,file, cb)=>{
+        const ext = path.extname(file.originalname)
+        if(ext !== '.png'){
+            return cb(res.status(400).end('only png plz'),false);
+        }
+        cb(null, true)
+      }
+  });
+
+  const upload = multer({storage: storage}).single("file");
+
+  app.post('/api/upload/image',(req,res)=>{
+      //받은 이미지 서버에 저장
+      upload(req, res, err => {
+          if(err) return res.json({success:false, err})
+        return res.json({success:true, url:res})
+      })
   })
 
 app.listen(port, ()=> console.log(`Hello! ${port} port!`))

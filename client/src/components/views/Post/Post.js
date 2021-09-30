@@ -8,7 +8,6 @@ import {
 function Post(props) {
     //console.log(props.post)
     const date = props.post.createdAt
-    console.log(date)
 
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
@@ -20,7 +19,7 @@ function Post(props) {
                     <span className="title">{props.post.title}</span>
                     <span className="writer">{props.post.writer.name}</span>
                     <div>{props.post.content}</div>
-                    <span className="date" style={{'justifySelf':'flex-end'}}>{date.substring(0,10) +' '+ date.substring(11,16)}</span>
+                    <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
             <div className="option">
