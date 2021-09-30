@@ -31,7 +31,7 @@ function WritePost(props) {
             date:new Date()
         }
         
-        axios.post('/api/upload/post', variable)
+        axios.post('/api/post/uploadPost', variable)
         .then(res=>{
             if(res.data.success){
                 message.success('성공적으로 업로드 했습니다.')
@@ -51,7 +51,7 @@ function WritePost(props) {
         }
         formData.append("file", files);
 
-        axios.post('/api/upload/image', formData, config)
+        axios.post('/api/upload/uploadImage', formData, config)
         .then(res => {
             if(res.data.success){
                 setfilePath(res.data.url)

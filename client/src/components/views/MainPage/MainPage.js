@@ -12,7 +12,7 @@ function MainPage(props) {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('/api/import/post')
+        axios.get('/api/post/getPost')
         .then(res => {
             if(res.data.success){
                 setPosts(res.data.posts)

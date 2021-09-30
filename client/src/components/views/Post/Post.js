@@ -17,8 +17,8 @@ function Post(props) {
     const [LikeCount, setLikeCount] = useState(0)
 
     useEffect(() => {
-
-        axios.post('/api/getLike', {postId:props.post._id})
+        //좋아요 수 불러오기 및 나의 좋아요 여부 확인
+        axios.post('/api/like/getLike', {postId:props.post._id})
         .then(res => {
             if(res.data.success){
                 setLikeCount(res.data.like.length)
@@ -39,7 +39,7 @@ function Post(props) {
         }
 
         if(Like){ //좋아요 해제
-             axios.post('/api/upload/unlike', variable)
+             axios.post('/api/like/setLike', variable)
             .then(res=>{
                 if(res.data.success){
                     setLike(!Like)
@@ -49,7 +49,7 @@ function Post(props) {
                 } 
             })
         }else{ //좋아요 처리
-            axios.post('/api/upload/like', variable)
+            axios.post('/api/like/unLike', variable)
             .then(res => {
                 if(res.data.success){
                     setLike(!Like)
