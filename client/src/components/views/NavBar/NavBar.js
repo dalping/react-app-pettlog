@@ -7,7 +7,6 @@ import MenuRight from './MenuRight';
 function NavBar() {
 
     const user = useSelector(state => state.user_reducer);
-    console.log(user);
 
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>

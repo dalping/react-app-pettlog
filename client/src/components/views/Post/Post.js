@@ -4,16 +4,19 @@ import {
     HeartOutlined,
     RetweetOutlined
   } from '@ant-design/icons';
+import { Image } from 'antd';
 
 function Post(props) {
-    //console.log(props.post)
+    console.log(props.post.filePath)
     const date = props.post.createdAt
 
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
             <div className="post">
                 <div className="photo">
-                    image
+                    {props.post.filePath &&
+                        <Image width={300} height={300} alt="photo" src={`http://localhost:5000/${props.post.filePath}`}/> 
+                    }  
                 </div>
                 <div className="content" style={{'width':'300px','height':'300px','padding':'15px'}}>
                     <span className="title">{props.post.title}</span>

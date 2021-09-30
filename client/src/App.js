@@ -13,6 +13,7 @@ function App() {
     <Router>
       <div>
         <NavBar/>
+        <div />
         <Switch>
           <Route exact path="/" component={Auth(MainPage, null)} />
           {/* <Route exact path="/mypage" component={Auth(MyPage, true)} /> */}

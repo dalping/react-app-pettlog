@@ -11,6 +11,12 @@ const postSchema = mongoose.Schema({
     },
     content:{ //대댓글 
         type:String
+    },
+    filePath:{
+        type:String
+    },
+    date:{ //현재시간 불러오기
+        type:String
     }
 },{timestamps:true})
 

@@ -15,6 +15,7 @@ app.use(bodyParder.urlencoded({extended:true}));
 app.use(bodyParder.json());
 const {auth} = require('./middleware/auth');
 app.use(cookieParser());
+app.use('/uploads', express.static('uploads'));
 
 //mongoDB connect
 const mongoose = require('mongoose')
@@ -111,7 +112,6 @@ app.get('/api/users/logout', auth, (req, res) => {
   app.post('/api/upload/post', (req, res)=>{
 
     const post = new Post(req.body)
-    console.log('hello')
     
     post.save((err,doc) => { //save to mongoDB
         if(err) return res.json({success:false, err})
@@ -119,29 +119,30 @@ app.get('/api/users/logout', auth, (req, res) => {
     })
   })
 
-  let storage = multer.diskStorage({
+  var storage = multer.diskStorage({
       destination:(req, file, cb) => {
+        console.log(file)
         cb(null, "uploads/");
       },
       filename:(req,file,cb) =>{
         cb(null, `${Date.now()}_${file.originalname}`);
-      },
-      fileFileter:(req,file, cb)=>{
-        const ext = path.extname(file.originalname)
-        if(ext !== '.png'){
-            return cb(res.status(400).end('only png plz'),false);
-        }
-        cb(null, true)
       }
+    //   fileFileter:(req,file, cb)=>{
+    //     const ext = path.extname(file.originalname) //확장자
+    //     if(ext !== '.png'){
+    //         return cb(res.status(400).end('only png plz'),false);
+    //     }
+    //     cb(null, true)
+    //   }
   });
 
-  const upload = multer({storage: storage}).single("file");
+  var upload = multer({ storage: storage }).single("file")
 
-  app.post('/api/upload/image',(req,res)=>{
-      //받은 이미지 서버에 저장
+  app.post('/api/upload/image',(req, res)=>{
+      console.log(req.body)
       upload(req, res, err => {
           if(err) return res.json({success:false, err})
-        return res.json({success:true, url:res})
+          return res.json({success:true, url:res.req.file.path, fileName: res.req.file.filename})
       })
   })
 

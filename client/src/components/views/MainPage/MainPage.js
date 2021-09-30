@@ -16,7 +16,6 @@ function MainPage(props) {
         .then(res => {
             if(res.data.success){
                 setPosts(res.data.posts)
-                console.log(Posts)
             }else{
                 alert('fail to load Post')
             }
