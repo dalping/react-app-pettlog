@@ -1,14 +1,65 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {
     MessageOutlined,
+    HeartFilled,
     HeartOutlined,
     RetweetOutlined
   } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 import { Image } from 'antd';
+import axios from 'axios';
 
 function Post(props) {
-    console.log(props.post.filePath)
+    
+    const user = useSelector(state => state.user_reducer)
     const date = props.post.createdAt
+    const [Like, setLike] = useState(false)
+    const [LikeCount, setLikeCount] = useState(0)
+
+    useEffect(() => {
+
+        axios.post('/api/getLike', {postId:props.post._id})
+        .then(res => {
+            if(res.data.success){
+                setLikeCount(res.data.like.length)
+                if(res.data.like.filter(me => me.likeFrom.includes(user.userData._id)).length === 0){
+                    setLike(false)
+                }else{
+                    setLike(true)
+                }
+            }
+        })
+    }, [])
+
+    const onLikeHandler = (e) => {
+
+        const variable = {
+            likeFrom :user.userData._id,
+            postId:props.post._id,
+        }
+
+        if(Like){ //좋아요 해제
+             axios.post('/api/upload/unlike', variable)
+            .then(res=>{
+                if(res.data.success){
+                    setLike(!Like)
+                    setLikeCount(LikeCount - 1)
+                }else{
+                    alert("좋아요 해제를 실패했습니다.")
+                } 
+            })
+        }else{ //좋아요 처리
+            axios.post('/api/upload/like', variable)
+            .then(res => {
+                if(res.data.success){
+                    setLike(!Like)
+                    setLikeCount(LikeCount + 1)
+                }else{
+                    alert("좋아요를 실패했습니다.")
+                }
+            })
+        }
+    } 
 
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
@@ -28,7 +79,11 @@ function Post(props) {
             <div className="option">
                 <div className="comments icon"><MessageOutlined style={{'fontSize':'25px'}}/>0</div>
                 
-                <div className="like icon"><HeartOutlined style={{'fontSize':'25px'}}/>0</div>
+                <div className="like icon" onClick={onLikeHandler}>
+                    {Like ? <HeartFilled style={{'fontSize':'25px'}}/>
+                    :<HeartOutlined style={{'fontSize':'25px'}}/>}
+                    {LikeCount}
+                </div>
                 
                 <div className="share icon"><RetweetOutlined style={{'fontSize':'25px'}}/>0</div>
             </div>

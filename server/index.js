@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const bodyParder = require('body-parser')
 const {User} = require('./models/User');
 const {Post} = require('./models/Post');
+const {Like} = require('./models/Like');
 const multer = require('multer');
 //, useCreateIndex: true, useFindAndModify: false
  const config = require('./config/key')
@@ -115,6 +116,32 @@ app.get('/api/users/logout', auth, (req, res) => {
     
     post.save((err,doc) => { //save to mongoDB
         if(err) return res.json({success:false, err})
+        res.status(200).json({success:true})
+    })
+  })
+
+  app.post('/api/getLike', (req, res) => {
+    Like.find(req.body)
+    .exec((err, like) => {
+        if(err) return res.status(400).send(err)
+        res.status(200).json({success:true, like})
+    })
+  })
+
+  app.post('/api/upload/like', (req, res) => {
+    
+    const like = new Like(req.body)
+    
+    like.save((err, doc) => {
+        if(err) return res.json({success:false, err})
+        res.status(200).json({success:true})
+    })
+  })
+
+  app.post('/api/upload/unlike', (req, res) => {
+    Like.deleteOne(req.body)
+    .exec((err, result)=>{
+        if(err) return result.status(400).json({success:false, err})
         res.status(200).json({success:true})
     })
   })
