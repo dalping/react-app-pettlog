@@ -3,6 +3,7 @@ import React,{useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import {message,Input,Upload,Button} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { withRouter } from 'react-router-dom';
 
 function WritePost(props) {
 
@@ -10,19 +11,24 @@ function WritePost(props) {
     const [fileList, setFileList] = useState([]);
     const [Title, setTitle] = useState('')
     const [Content, setContent] = useState('')
-    const [filePath, setfilePath] = useState('')
+    //const [filePath, setfilePath] = useState('')
 
     useEffect(() => {
         //console.log(fileList)
-    }, [fileList, filePath])
+    }, [fileList])
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
         if (fileList.length !== 0){ //올릴 이미지 파일이 있으면
-            console.log(fileList)
             onDrop(fileList)
+            return
+        }else{
+            uploadPost('')
         }
+    }
+        
+    const uploadPost = (filePath) => {
 
         const variable = {
             writer:user.userData._id,
@@ -31,11 +37,12 @@ function WritePost(props) {
             filePath:filePath,
             date:new Date()
         }
-        
+
         axios.post('/api/post/uploadPost', variable)
         .then(res=>{
             if(res.data.success){
-                message.success('성공적으로 업로드 했습니다.')
+                message.success('포스트를 업로드 했습니다.')
+                props.history.push('/')
                 // setTimeout(()=>{
                     //     props.history.push('/')
                     // }, 3000)
@@ -45,7 +52,7 @@ function WritePost(props) {
             })
         }
 
-    const onDrop = (files) => { //서버에 파일 업로드
+    const onDrop = async(files) => { //서버에 파일 업로드
         let formData = new FormData;
         const config = {
             header: { "Content-Type": "multipart/form-data" }
@@ -53,14 +60,9 @@ function WritePost(props) {
         formData.append("file", files[0]);
 
         axios.post('/api/post/uploadImage', formData, config)
-        .then(res => {
+        .then(res=>{
             if(res.data.success){
-                setfilePath(res.data.url)
-                //console.log(res.data)
-            }else{
-                console.log(res.data.err)
-                alert('이미지 업로드 실패')
-                return
+                uploadPost(res.data.url)
             }
         })
     }
@@ -116,4 +118,4 @@ function WritePost(props) {
     )
 }
 
-export default WritePost
+export default withRouter(WritePost)

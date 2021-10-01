@@ -7,7 +7,7 @@ import {
     RetweetOutlined
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { Image} from 'antd';
+import { Image,Popconfirm} from 'antd';
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
@@ -94,10 +94,18 @@ function Post(props) {
 
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
-            <CloseSquareOutlined 
-                style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
-                onClick={deletePostHandler}
-            />
+            
+            <Popconfirm
+                title="포스트를 삭제하시겠습니까?"
+                onConfirm={deletePostHandler}
+                okText="Yes"
+                cancelText="No"
+            >
+                <CloseSquareOutlined 
+                    style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
+                    //onClick={deletePostHandler}
+                />
+            </Popconfirm>
             <div className="post">
                 <div className="photo">
                     {props.post.filePath &&
@@ -121,14 +129,13 @@ function Post(props) {
                     :<HeartOutlined style={{'fontSize':'25px'}}/>}
                     {LikeCount}
                 </div>
-                
-                <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/>0</div>
+                <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/></div>
             </div>
             {OpenComment &&  
                 <div className="comments">
                     {
                         Comments && Comments.map((data,idx)=>(
-                            <Comment key={idx} comment={data}/>
+                            <Comment key={idx} comment={data} user={user.userData}/>
                         ))
                     }
                 </div>
