@@ -2,12 +2,12 @@ import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import {message,Input,Upload,Button} from 'antd';
-import { GoldOutlined, UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 
 function WritePost(props) {
 
     const user = useSelector(state => state.user_reducer)
-    const [fileList, setFileList] = useState({});
+    const [fileList, setFileList] = useState([]);
     const [Title, setTitle] = useState('')
     const [Content, setContent] = useState('')
     const [filePath, setfilePath] = useState('')
@@ -19,7 +19,8 @@ function WritePost(props) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        if (fileList){ //올릴 이미지 파일이 있으면
+        if (fileList.length !== 0){ //올릴 이미지 파일이 있으면
+            console.log(fileList)
             onDrop(fileList)
         }
 
@@ -49,9 +50,9 @@ function WritePost(props) {
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
-        formData.append("file", files);
+        formData.append("file", files[0]);
 
-        axios.post('/api/upload/uploadImage', formData, config)
+        axios.post('/api/post/uploadImage', formData, config)
         .then(res => {
             if(res.data.success){
                 setfilePath(res.data.url)
@@ -75,7 +76,7 @@ function WritePost(props) {
 
 
     const handleBefore = (file) => {
-        setFileList(file);
+        setFileList(fileList.concat([file]));
         return false
       }
 

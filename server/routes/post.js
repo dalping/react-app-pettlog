@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { Post } = require("../models/Post");
+const { Like } = require("../models/Like");
+const { Comment } = require("../models/Comment");
 const multer = require('multer');
 
 var storage = multer.diskStorage({
@@ -46,11 +48,29 @@ router.post('/uploadPost', (req, res)=>{
   })
 
   router.post('/uploadImage',(req, res)=>{
-      console.log(req.body)
       upload(req, res, err => {
           if(err) return res.json({success:false, err})
           return res.json({success:true, url:res.req.file.path, fileName: res.req.file.filename})
       })
+  })
+
+  router.post('/deletePost', (req, res) => {
+    Post.deleteOne(req.body)
+    .exec((err, result)=>{
+      if(err) return result.status(400).json({success:false, err})
+    });
+    
+    Like.deleteMany(req.body)
+    .exec((err, result)=>{
+      if(err) return result.status(400).json({success:false, err})
+    });
+    
+    Comment.deleteMany(req.body)
+    .exec((err, result)=>{
+      if(err) return result.status(400).json({success:false, err})
+    });
+  
+    res.status(200).json({success:true})
   })
 
 module.exports = router;

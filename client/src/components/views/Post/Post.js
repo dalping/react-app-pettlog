@@ -1,13 +1,16 @@
 import React,{useState, useEffect} from 'react'
 import {
+    CloseSquareOutlined,
     MessageOutlined,
     HeartFilled,
     HeartOutlined,
     RetweetOutlined
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { Image } from 'antd';
+import { Image} from 'antd';
 import axios from 'axios';
+import Comment from './Comment';
+import InputComment from './InputComment';
 
 function Post(props) {
     
@@ -15,6 +18,9 @@ function Post(props) {
     const date = props.post.createdAt
     const [Like, setLike] = useState(false)
     const [LikeCount, setLikeCount] = useState(0)
+    const [Comments, setComments] = useState([])
+    const [OpenComment, setOpenComment] = useState(false)
+
 
     useEffect(() => {
         //좋아요 수 불러오기 및 나의 좋아요 여부 확인
@@ -29,8 +35,33 @@ function Post(props) {
                 }
             }
         })
+
+        axios.post('/api/comment/getComment',{postId:props.post._id})
+        .then(res => {
+            if(res.data.success){
+                setComments(res.data.comments)
+            }
+        })
+
     }, [])
 
+    const deletePostHandler = (e) => {
+        axios.post('/api/post/deletePost',{postId:props.post._id})
+        .then(res=>{
+            if(res.data.success){
+                console.log('삭제 완료')
+            }
+        })
+    }
+
+    const showCommentHandler = (e) => {
+        setOpenComment(!OpenComment)
+    }
+
+    const updateComment = (newComment) => {
+        setComments(Comments.concat(newComment))
+    }
+    
     const onLikeHandler = (e) => {
 
         const variable = {
@@ -39,7 +70,7 @@ function Post(props) {
         }
 
         if(Like){ //좋아요 해제
-             axios.post('/api/like/setLike', variable)
+             axios.post('/api/like/unLike', variable)
             .then(res=>{
                 if(res.data.success){
                     setLike(!Like)
@@ -49,7 +80,7 @@ function Post(props) {
                 } 
             })
         }else{ //좋아요 처리
-            axios.post('/api/like/unLike', variable)
+            axios.post('/api/like/setLike', variable)
             .then(res => {
                 if(res.data.success){
                     setLike(!Like)
@@ -63,6 +94,10 @@ function Post(props) {
 
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
+            <CloseSquareOutlined 
+                style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
+                onClick={deletePostHandler}
+            />
             <div className="post">
                 <div className="photo">
                     {props.post.filePath &&
@@ -72,21 +107,32 @@ function Post(props) {
                 <div className="content" style={{'width':'300px','height':'300px','padding':'15px'}}>
                     <span className="title">{props.post.title}</span>
                     <span className="writer">{props.post.writer.name}</span>
-                    <div>{props.post.content}</div>
+                    <div style={{textAlign:'justify', maxHeight:'200px',overflow:'scroll'}}>{props.post.content}</div>
                     <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
+
+            <InputComment user={user.userData} postId={props.post._id} updateComment={updateComment}/>
+
             <div className="option">
-                <div className="comments icon"><MessageOutlined style={{'fontSize':'25px'}}/>0</div>
-                
-                <div className="like icon" onClick={onLikeHandler}>
-                    {Like ? <HeartFilled style={{'fontSize':'25px'}}/>
+                <div className="comment_icon icon" onClick={showCommentHandler}><MessageOutlined style={{'fontSize':'25px'}}/>{Comments.length}</div>
+                <div className="like_icon icon" onClick={onLikeHandler}>
+                    {Like ? <HeartFilled style={{fontSize:'25px',color:'red'}}/>
                     :<HeartOutlined style={{'fontSize':'25px'}}/>}
                     {LikeCount}
                 </div>
                 
-                <div className="share icon"><RetweetOutlined style={{'fontSize':'25px'}}/>0</div>
+                <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/>0</div>
             </div>
+            {OpenComment &&  
+                <div className="comments">
+                    {
+                        Comments && Comments.map((data,idx)=>(
+                            <Comment key={idx} comment={data}/>
+                        ))
+                    }
+                </div>
+            }
         </div>
     )
 }
