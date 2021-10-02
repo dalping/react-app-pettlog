@@ -53,7 +53,7 @@ function WritePost(props) {
         }
 
     const onDrop = async(files) => { //서버에 파일 업로드
-        let formData = new FormData;
+        let formData = new FormData();
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }

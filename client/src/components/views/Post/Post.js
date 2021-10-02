@@ -95,17 +95,21 @@ function Post(props) {
     return (
         <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
             
-            <Popconfirm
-                title="포스트를 삭제하시겠습니까?"
-                onConfirm={deletePostHandler}
-                okText="Yes"
-                cancelText="No"
-            >
-                <CloseSquareOutlined 
-                    style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
-                    //onClick={deletePostHandler}
-                />
-            </Popconfirm>
+            {
+                user.userData._id === props.post.writer._id &&
+                <Popconfirm
+                    title="포스트를 삭제하시겠습니까?"
+                    onConfirm={deletePostHandler}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                    <CloseSquareOutlined 
+                        style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
+                        //onClick={deletePostHandler}
+                    />
+                </Popconfirm>
+            }
+
             <div className="post">
                 <div className="photo">
                     {props.post.filePath &&
@@ -131,7 +135,7 @@ function Post(props) {
                 </div>
                 <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/></div>
             </div>
-            {OpenComment &&  
+            {OpenComment && Comments.length !== 0 &&  
                 <div className="comments">
                     {
                         Comments && Comments.map((data,idx)=>(

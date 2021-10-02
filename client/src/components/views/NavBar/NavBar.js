@@ -9,7 +9,7 @@ function NavBar() {
     const user = useSelector(state => state.user_reducer);
 
     return (
-        <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
+        <nav className="menu" style={{ position: 'fixed', zIndex:'10', width: '100%' }}>
             
                 <div className="menu_logo">
                     <a href="/">Pettlog</a>

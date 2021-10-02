@@ -74,6 +74,23 @@ code {
   font-size: 0.7rem;
 }
 
+.writePostBtn{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: mediumaquamarine;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+}
+
 .comments{
   border-top: 1px solid gray;
   max-height: 300px;
@@ -84,7 +101,7 @@ code {
   display: flex;
   align-items: center;
   min-height: 50px;
-  padding: 10px;
+  padding: 20px;
   border-bottom: 1px solid rgb(196, 196, 196);
   gap: 0 10px;
 }
