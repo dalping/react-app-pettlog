@@ -31,4 +31,12 @@ router.post('/uploadComment', (req, res) => {
     })
 })
 
+router.post('/deleteComment', (req, res) => {
+    Comment.deleteOne(req.body)
+    .exec((err, result)=>{
+        if(err) return result.status(400).json({success:false, err})
+        res.status(200).json({success:true})
+    });
+})
+
 module.exports = router; 

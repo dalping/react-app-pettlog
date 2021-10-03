@@ -44,14 +44,19 @@ function Post(props) {
 
     }, [])
 
-    const deletePostHandler = (e) => {
+    const deleteComment = (deleteCommentId) => {
+        const idx = Comments.findIndex( p => p._id === deleteCommentId)
+        const newArr = [...Comments]
+        newArr.splice(idx, 1)
+        setComments(newArr)
+    }
 
-        console.log(props.post)
+    const deletePostHandler = (e) => {
 
         axios.post('/api/post/deletePost',{postId:props.post._id})
         .then(res=>{
             if(res.data.success){
-                console.log('삭제 완료')
+                props.deletePost(props.post._id)
             }
         })
     }
@@ -141,7 +146,7 @@ function Post(props) {
                 <div className="comments box">
                     {
                         Comments && Comments.map((data,idx)=>(
-                            <Comment key={idx} comment={data} user={user.userData}/>
+                            <Comment key={idx} comment={data} user={user.userData} deleteComment={deleteComment}/>
                         ))
                     }
                 </div>

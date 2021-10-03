@@ -1,18 +1,11 @@
 import React,{useState, useEffect} from 'react'
 import {withRouter} from  'react-router-dom';
-import { useHistory } from 'react-router';
 import axios from 'axios';
 import Post from '../Post/Post';
 
 function MainPage(props) {
 
     const [Posts, setPosts] = useState([])
-
-    let history = useHistory();
-
-    useEffect(() => {
-        console.log(Posts.length)
-    }, [Posts])
 
     useEffect(() => {
         axios.get('/api/post/getPost')
@@ -25,12 +18,19 @@ function MainPage(props) {
         })
     }, [])
 
+    const deletePost = (deletePostId) => {
+        const idx = Posts.findIndex( p => p._id === deletePostId)
+        const newArr = [...Posts]
+        newArr.splice(idx, 1)
+        setPosts(newArr)
+    }
+
     return (
         <div style={{padding:'20px', paddingTop:'76px'}}>
-            <div className="writePostBtn" onClick={()=>{history.push('/write')}}>Write</div>
+            <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             <div className="posts" style={{display:'flex', flexDirection:'column'}}>
                 {Posts.map((data,idx)=>(
-                    <Post key={idx} post={data} />
+                    <Post key={idx} post={data} deletePost={deletePost}/>
                 ))}
             </div>
         </div>
