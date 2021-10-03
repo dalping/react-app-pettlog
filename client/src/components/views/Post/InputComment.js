@@ -23,6 +23,7 @@ function InputComment(props) {
         .then(res=>{
             if(res.data.success){
                 setInputComment('') 
+                console.log(res.data.comment)
                 props.updateComment(res.data.comment)   
             }else{
                 alert('코멘트 작성 실패')
