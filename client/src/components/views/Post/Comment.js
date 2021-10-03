@@ -6,6 +6,7 @@ import {
 function Comment(props) {
 
     const date = props.comment.createdAt
+    console.log(props.comment.userId)
 
     return (
         <div className="comment">

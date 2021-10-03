@@ -19,10 +19,16 @@ router.post('/uploadComment', (req, res) => {
 
     const comment = new Comment(req.body)
 
-    comment.save((err, doc) => {
+    comment.save((err, doc) => { 
         if(err) return res.json({success:false, err})
-        res.status(200).json({success:true, comment:doc})
+        
+        Comment.find(req.body)
+        .populate('userId')
+        .exec((err, comment)=>{
+            if(err) return res.json({success:false, err})
+            res.status(200).json({success:true, comment:comment})
+        })
     })
 })
 
-module.exports = router;
+module.exports = router; 

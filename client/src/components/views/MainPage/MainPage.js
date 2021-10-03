@@ -12,6 +12,10 @@ function MainPage(props) {
     let history = useHistory();
 
     useEffect(() => {
+        console.log(Posts.length)
+    }, [Posts])
+
+    useEffect(() => {
         axios.get('/api/post/getPost')
         .then(res => {
             if(res.data.success){

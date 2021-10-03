@@ -55,7 +55,10 @@ router.post('/uploadPost', (req, res)=>{
   })
 
   router.post('/deletePost', (req, res) => {
-    Post.deleteOne(req.body)
+
+    console.log(req.body)
+
+    Post.deleteOne({_id:req.body.postId})
     .exec((err, result)=>{
       if(err) return result.status(400).json({success:false, err})
     });

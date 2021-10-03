@@ -11,7 +11,6 @@ function WritePost(props) {
     const [fileList, setFileList] = useState([]);
     const [Title, setTitle] = useState('')
     const [Content, setContent] = useState('')
-    //const [filePath, setfilePath] = useState('')
 
     useEffect(() => {
         //console.log(fileList)
@@ -43,9 +42,6 @@ function WritePost(props) {
             if(res.data.success){
                 message.success('포스트를 업로드 했습니다.')
                 props.history.push('/')
-                // setTimeout(()=>{
-                    //     props.history.push('/')
-                    // }, 3000)
                 }else{
                     alert('fail to upload Post')
                 }
