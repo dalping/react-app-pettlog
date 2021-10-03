@@ -119,7 +119,7 @@ function Post(props) {
                 <div className="content" style={{'width':'300px','height':'300px','padding':'15px'}}>
                     <span className="title">{props.post.title}</span>
                     <span className="writer">{props.post.writer.name}</span>
-                    <div style={{textAlign:'justify', maxHeight:'200px',overflow:'scroll'}}>{props.post.content}</div>
+                    <div className="box" style={{textAlign:'justify', maxHeight:'200px',overflow:'scroll'}}>{props.post.content}</div>
                     <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
@@ -136,7 +136,7 @@ function Post(props) {
                 <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/></div>
             </div>
             {OpenComment && Comments.length !== 0 &&  
-                <div className="comments">
+                <div className="comments box">
                     {
                         Comments && Comments.map((data,idx)=>(
                             <Comment key={idx} comment={data} user={user.userData}/>
