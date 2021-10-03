@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react'
 import {withRouter} from  'react-router-dom';
-import { Button } from 'antd';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import Post from '../Post/Post';
@@ -27,7 +26,7 @@ function MainPage(props) {
             <div className="writePostBtn" onClick={()=>{history.push('/write')}}>Write</div>
             <div className="posts" style={{display:'flex', flexDirection:'column'}}>
                 {Posts.map((data,idx)=>(
-                    <Post key={idx} post={data}/>
+                    <Post key={idx} post={data} />
                 ))}
             </div>
         </div>

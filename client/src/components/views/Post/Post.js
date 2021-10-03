@@ -21,7 +21,6 @@ function Post(props) {
     const [Comments, setComments] = useState([])
     const [OpenComment, setOpenComment] = useState(false)
 
-
     useEffect(() => {
         //좋아요 수 불러오기 및 나의 좋아요 여부 확인
         axios.post('/api/like/getLike', {postId:props.post._id})
