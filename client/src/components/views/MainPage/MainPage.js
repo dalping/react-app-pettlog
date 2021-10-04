@@ -28,7 +28,7 @@ function MainPage(props) {
     return (
         <div style={{padding:'20px', paddingTop:'76px'}}>
             <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
-            <div className="posts" style={{display:'flex', flexDirection:'column'}}>
+            <div className="posts" style={{display:'flex', flexDirection:'column', gap:'20px'}}>
                 {Posts.map((data,idx)=>(
                     <Post key={idx} post={data} deletePost={deletePost}/>
                 ))}

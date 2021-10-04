@@ -1,0 +1,97 @@
+.total {
+  width: 600px;
+  /* height:360px; */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-family: "NEXON Lv2 Gothic";
+}
+
+.post {
+  display: flex;
+  border-bottom: 1px solid black;
+}
+
+.photo {
+  width: 300px;
+  height: 300px;
+  background-color: #98ddca;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+  padding: 15px;
+}
+
+.title {
+  font-style: bold;
+  font-size: 1.2rem;
+}
+
+.writer {
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+  color: gray;
+  font-size: 0.7rem;
+}
+
+.postConent {
+  text-align: justify;
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.date {
+  text-align: right;
+  color: gray;
+  font-size: 0.7rem;
+}
+
+.option {
+  display: flex;
+  height: 60px;
+  padding: 0 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: gray;
+  font-size: 0.7rem;
+}
+
+.optionIcon {
+  font-size: 25px;
+}
+
+@font-face {
+  font-family: "Cafe24SsurroundAir";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NEXON Lv2 Gothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBMPlexSansKR-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

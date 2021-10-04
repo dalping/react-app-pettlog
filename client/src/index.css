@@ -12,68 +12,6 @@ code {
     monospace;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-}
-
-.writer {
-  border-bottom: 1px solid black;
-  margin-bottom: 5px;
-}
-
-.post {
-  display: flex;
-  border-bottom: 1px solid black;
-}
-
-.option {
-  display: flex;
-  height: 60px;
-  padding: 0 30px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.photo {
-  width: 300px;
-  height: 300px;
-  background-color: #98ddca;
-}
-
-.total {
-  width: 600px;
-  /* height:360px; */
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.icon {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  color: gray;
-  font-size: 0.7rem;
-}
-
-.date {
-  text-align: right;
-  color: gray;
-  font-size: 0.7rem;
-}
-
-.title {
-  font-style: bold;
-  font-size: 1.2rem;
-}
-
-.writer {
-  color: gray;
-  font-size: 0.7rem;
-}
-
 .writePostBtn {
   position: fixed;
   display: flex;
@@ -84,26 +22,11 @@ code {
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  background-color: #98DDCA;
+  background-color: #98ddca;
   font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   color: white;
-}
-
-.comments {
-  border-top: 1px solid gray;
-  max-height: 300px;
-  overflow: scroll;
-}
-
-.comment {
-  display: flex;
-  align-items: center;
-  min-height: 50px;
-  padding: 20px;
-  border-bottom: 1px solid rgb(196, 196, 196);
-  gap: 0 10px;
 }
 
 .inputComment {

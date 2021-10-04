@@ -16,7 +16,6 @@ function InputReplyComment(props) {
         if(InputReply.length === 0) return 
 
         const variable = {
-
             replyTo : props.comment._id,
             userId : props.user._id,
             postId : props.post._id,
@@ -27,8 +26,8 @@ function InputReplyComment(props) {
         .then(res=>{
             if(res.data.success){
                 setInputReply('')
-                //setOpenReplyComment(false)
-                //props.updateComment(res.data.comment)   
+                props.updateComment(res.data.comment)
+                props.openReplyHandler()  
             }else{
                 alert('리플라이 코멘트 작성 실패')
             }
@@ -41,8 +40,8 @@ function InputReplyComment(props) {
                 <Input type="text" value={InputReply} onChange={InputReplyHandelr} placeholder={`@${props.comment.userId.name} 에게 댓글 달기...`}/>
                 {
                     InputReply.length > 0 ? 
-                    <Button type="text" onClick>작성</Button>
-                    : <Button type="text" onClick disabled>작성</Button>
+                    <Button type="text" onClick={onSubmitReplyComment}>작성</Button>
+                    : <Button type="text" disabled>작성</Button>
                 }
             </form>
         </div>

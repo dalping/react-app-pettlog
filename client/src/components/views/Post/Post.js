@@ -11,6 +11,8 @@ import { Image,Popconfirm} from 'antd';
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
+import './Post.css'
+import './Comment.css'
 
 function Post(props) {
     
@@ -35,24 +37,16 @@ function Post(props) {
             }
         })
 
+        //해당 포스트의 댓글 불러오기
         axios.post('/api/comment/getComment',{postId:props.post._id})
         .then(res => {
             if(res.data.success){
                 setComments(res.data.comments)
             }
         })
-
     }, [])
 
-    const deleteComment = (deleteCommentId) => {
-        const idx = Comments.findIndex( p => p._id === deleteCommentId)
-        const newArr = [...Comments]
-        newArr.splice(idx, 1)
-        setComments(newArr)
-    }
-
     const deletePostHandler = (e) => {
-
         axios.post('/api/post/deletePost',{postId:props.post._id})
         .then(res=>{
             if(res.data.success){
@@ -60,9 +54,16 @@ function Post(props) {
             }
         })
     }
-
+    
     const showCommentHandler = (e) => {
         setOpenComment(!OpenComment)
+    }
+    
+    const deleteComment = (deleteCommentId) => {
+        const idx = Comments.findIndex( p => p._id === deleteCommentId)
+        const newArr = [...Comments]
+        newArr.splice(idx, 1)
+        setComments(newArr)
     }
 
     const updateComment = (newComment) => {
@@ -100,7 +101,7 @@ function Post(props) {
     } 
 
     return (
-        <div className="total" style={{"border":"1px solid gray",'borderRadius':'5px'}}>
+        <div className="total">
             
             {
                 user.userData._id === props.post.writer._id &&
@@ -112,7 +113,6 @@ function Post(props) {
                 >
                     <CloseSquareOutlined 
                         style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
-                        //onClick={deletePostHandler}
                     />
                 </Popconfirm>
             }
@@ -123,10 +123,10 @@ function Post(props) {
                         <Image width={300} height={300} alt="photo" src={`http://localhost:5000/${props.post.filePath}`}/> 
                     }  
                 </div>
-                <div className="content" style={{'width':'300px','height':'300px','padding':'15px'}}>
+                <div className="content">
                     <span className="title">{props.post.title}</span>
                     <span className="writer">{props.post.writer.name}</span>
-                    <div className="box" style={{textAlign:'justify', maxHeight:'200px',overflow:'scroll'}}>{props.post.content}</div>
+                    <div className="postContent box">{props.post.content}</div>
                     <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
@@ -134,23 +134,39 @@ function Post(props) {
             <InputComment user={user.userData} postId={props.post._id} updateComment={updateComment}/>
 
             <div className="option">
-                <div className="comment_icon icon" onClick={showCommentHandler}><MessageOutlined style={{'fontSize':'25px'}}/>{Comments.length}</div>
+                <div className="comment_icon icon" onClick={showCommentHandler}>
+                    <MessageOutlined className="optionIcon"/>{Comments.length}
+                </div>
                 <div className="like_icon icon" onClick={onLikeHandler}>
-                    {Like ? <HeartFilled style={{fontSize:'25px',color:'red'}}/>
-                    :<HeartOutlined style={{'fontSize':'25px'}}/>}
+                    {Like ? <HeartFilled className="optionIcon" style={{color:'red'}}/>
+                    :<HeartOutlined className="optionIcon"/>}
                     {LikeCount}
                 </div>
-                <div className="share_icon icon"><RetweetOutlined style={{'fontSize':'25px'}}/></div>
+                <div className="share_icon icon">
+                    <RetweetOutlined className="optionIcon"/>
+                </div>
             </div>
+
             {OpenComment && Comments.length !== 0 &&  
                 <div className="comments box">
                     {
                         Comments && Comments.map((data,idx)=>(
-                            <Comment key={idx} comment={data} user={user.userData} post={props.post} deleteComment={deleteComment}/>
+                            ( !data.replyTo &&  
+                            <Comment 
+                                key={idx} 
+                                comments={Comments} 
+                                comment={data} 
+                                user={user.userData} 
+                                post={props.post} 
+                                deleteComment={deleteComment}
+                                updateComment={updateComment}
+                            />
+                            )
                         ))
                     }
                 </div>
             }
+
         </div>
     )
 }
