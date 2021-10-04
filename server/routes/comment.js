@@ -51,8 +51,17 @@ router.post('/deleteComment', (req, res) => {
     Comment.deleteOne(req.body)
     .exec((err, result)=>{
         if(err) return result.status(400).json({success:false, err})
+
+        //메인 댓글과 연결된 대댓글 삭제
+        Comment.deleteMany({replyTo:req.body._id})
+        .exec((err, result)=>{
+        if(err) return result.status(400).json({success:false, err})
+        });
+
         res.status(200).json({success:true})
     });
 })
+
+
 
 module.exports = router; 

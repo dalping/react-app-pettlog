@@ -47,7 +47,7 @@ function Comment(props) {
                 (
                     data.replyTo && data.replyTo === props.comment._id &&
                     <div className="comment">
-                        <span style={{marginRight:"10px"}}> ↳ </span>
+                        <span style={{marginRight:"5px"}}> ↳ </span>
                         <div className="commentMain">
                             <span className="commentWriter">{data.userId.name}</span>
                             <span className="commentContent">
