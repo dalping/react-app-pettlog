@@ -146,7 +146,7 @@ function Post(props) {
                 <div className="comments box">
                     {
                         Comments && Comments.map((data,idx)=>(
-                            <Comment key={idx} comment={data} user={user.userData} deleteComment={deleteComment}/>
+                            <Comment key={idx} comment={data} user={user.userData} post={props.post} deleteComment={deleteComment}/>
                         ))
                     }
                 </div>

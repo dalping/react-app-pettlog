@@ -13,6 +13,8 @@ function InputComment(props) {
     const onSubmitComment = (e) => {
         e.preventDefault();
 
+        if(InputComment.length === 0) return 
+
         const variable = {
             userId : props.user._id,
             postId : props.postId,
@@ -34,9 +36,13 @@ function InputComment(props) {
     return (
         <div className="inputComment">
             <span style={{marginRight:'10px'}}>{props.user.name}</span>
-            <form style={{display:'flex', width:'100%'}} onSubmit={onSubmitComment}>
+            <form style={{display:'flex', width:'100%'}} onSubmit={onSubmitComment} >
                 <Input type="text" value={InputComment} onChange={inputCommentHandler}/>
-                <Button onClick={onSubmitComment}>작성</Button>
+                {
+                    InputComment.length > 0 ? 
+                    <Button onClick={onSubmitComment}>작성</Button>
+                    : <Button onClick={onSubmitComment} disabled>작성</Button>
+                }
             </form>
         </div>
     )

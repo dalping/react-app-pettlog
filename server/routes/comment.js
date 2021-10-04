@@ -31,6 +31,22 @@ router.post('/uploadComment', (req, res) => {
     })
 })
 
+router.post('/uploadReplyComment', (req, res) => {
+
+    const comment = new Comment(req.body)
+
+    comment.save((err, doc) => { 
+        if(err) return res.json({success:false, err})
+        
+        Comment.find(req.body)
+        .populate('userId')
+        .exec((err, comment)=>{
+            if(err) return res.json({success:false, err})
+            res.status(200).json({success:true, comment:comment})
+        })
+    })
+})
+
 router.post('/deleteComment', (req, res) => {
     Comment.deleteOne(req.body)
     .exec((err, result)=>{
