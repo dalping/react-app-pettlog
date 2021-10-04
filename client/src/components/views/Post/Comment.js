@@ -36,17 +36,17 @@ function Comment(props) {
                     <span className="date">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
                     {
                         props.user._id === props.comment.userId._id? 
-                        <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(props.comment._id)}} style={{fontSize:'0.7rem' ,color:'gray', cursor:'pointer', marginLeft:'5px'}}/>
+                        <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(props.comment._id)}} />
                         :<span className="commentBtn" onClick={openReplyHandler}>Reply</span>
                     }
                 </span>
             </div>
         </div>
         { //Reply Comments
-            props.comments.map(data => (
+            props.comments.map((data, idx) => (
                 (
                     data.replyTo && data.replyTo === props.comment._id &&
-                    <div className="comment">
+                    <div className="comment" key={idx}>
                         <span style={{marginRight:"5px"}}> ↳ </span>
                         <div className="commentMain">
                             <span className="commentWriter">{data.userId.name}</span>

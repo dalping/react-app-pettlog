@@ -135,7 +135,12 @@ function Post(props) {
 
             <div className="option">
                 <div className="comment_icon icon" onClick={showCommentHandler}>
-                    <MessageOutlined className="optionIcon"/>{Comments.length}
+                    {
+                        OpenComment?
+                        <MessageOutlined className="optionIcon" style={{color:"#47cea8"}}/>
+                        :<MessageOutlined className="optionIcon"/>
+                    }
+                    {Comments.length}
                 </div>
                 <div className="like_icon icon" onClick={onLikeHandler}>
                     {Like ? <HeartFilled className="optionIcon" style={{color:'red'}}/>
