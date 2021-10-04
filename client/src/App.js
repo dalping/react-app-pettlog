@@ -15,7 +15,7 @@ function App() {
         <NavBar/>
         <div />
         <Switch>
-          <Route exact path="/" component={Auth(MainPage, null)} />
+          <Route exact path="/" component={Auth(MainPage, true)} />
           {/* <Route exact path="/mypage" component={Auth(MyPage, true)} /> */}
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/write" component={Auth(WritePost, true)} />

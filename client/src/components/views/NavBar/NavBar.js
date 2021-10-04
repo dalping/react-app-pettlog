@@ -16,15 +16,9 @@ function NavBar() {
                 </div>
                 <div className="menu_content">
                     <div className="navbar_left">
-                        <div className="navbar_item">
+                        {/* <div className="navbar_item">
                             <a href="/">Home</a>
-                        </div>
-                        <div className="navbar_item">
-                            <a href="/">MyPage</a>
-                        </div>
-                        <div className="navbar_item">
-                            <a href="/">Content</a>
-                        </div>
+                        </div> */}
                     </div>
                     <MenuRight/>
                     
