@@ -12,14 +12,14 @@ var storage = multer.diskStorage({
     },
     filename:(req, file, cb) =>{
       cb(null, `${Date.now()}_${file.originalname}`);
+    },
+    fileFileter:(req,file, cb)=>{
+      const ext = path.extname(file.originalname) //확장자
+      if(ext !== '.png'&&ext !== '.jpg'&&ext !== '.jpeg'){
+          return cb(res.status(400).end('only png plz'),false);
+      }
+      cb(null, true)
     }
-  //   fileFileter:(req,file, cb)=>{
-  //     const ext = path.extname(file.originalname) //확장자
-  //     if(ext !== '.png'){
-  //         return cb(res.status(400).end('only png plz'),false);
-  //     }
-  //     cb(null, true)
-  //   }
 });
 
 var upload = multer({ storage: storage }).array("file")
@@ -40,6 +40,15 @@ router.post('/uploadPost', (req, res)=>{
 
   router.get('/getPost', (req, res) => {
     Post.find() 
+    .populate('writer')
+    .exec((err, posts) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({success:true, posts})
+    })
+  })
+
+  router.post('/getMyPost', (req, res) => {
+    Post.find(req.body) 
     .populate('writer')
     .exec((err, posts) => {
         if(err) return res.status(400).send(err);

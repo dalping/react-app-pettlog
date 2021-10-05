@@ -102,7 +102,7 @@ function Post(props) {
 
     return (
         <div className="total">
-            
+
             {
                 user.userData._id === props.post.writer._id &&
                 <Popconfirm
@@ -111,9 +111,7 @@ function Post(props) {
                     okText="Yes"
                     cancelText="No"
                 >
-                    <CloseSquareOutlined 
-                        style={{position:'absolute', margin:'5px', left:'595px', cursor:'pointer'}}
-                    />
+                    <CloseSquareOutlined className="deletePostBtn"/>
                 </Popconfirm>
             }
 

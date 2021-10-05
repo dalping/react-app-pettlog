@@ -6,11 +6,19 @@
   border: 1px solid gray;
   border-radius: 5px;
   font-family: "NEXON Lv2 Gothic";
+  position: relative;
 }
 
 .post {
   display: flex;
   border-bottom: 1px solid black;
+}
+
+.deletePostBtn {
+  position: absolute;
+  margin: 5px;
+  cursor: pointer;
+  right: 0px;
 }
 
 .photo {

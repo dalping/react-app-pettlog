@@ -13,7 +13,7 @@ function WritePost(props) {
     const [Content, setContent] = useState('')
 
     useEffect(() => {
-        console.log(fileList)
+        //console.log(fileList)
     }, [fileList])
 
     const onSubmitHandler = (e) => {
@@ -61,8 +61,6 @@ function WritePost(props) {
         await axios.post('/api/post/uploadImage', formData, config)
         .then(res=>{
             if(res.data.success){
-
-                console.log(res.data.url)
                 uploadPost(res.data.url)
             }
         })

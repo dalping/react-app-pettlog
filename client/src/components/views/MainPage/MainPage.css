@@ -1,0 +1,43 @@
+.mainpage {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  padding-top: 76px;
+  height: 100vh;
+}
+
+.category {
+  background-color: #98ddca;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cafe24Ssurround";
+}
+
+.category span {
+  font-size: 1.5rem;
+  color: gray;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.posts {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  gap: 20px;
+  height: 100%;
+  overflow: scroll;
+}
+
+@font-face {
+  font-family: "Cafe24Ssurround";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
