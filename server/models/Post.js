@@ -13,7 +13,7 @@ const postSchema = mongoose.Schema({
         type:String
     },
     filePath:{
-        type:String
+        type:Array
     },
     date:{ //현재시간 불러오기
         type:String

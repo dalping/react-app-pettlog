@@ -13,7 +13,7 @@ function WritePost(props) {
     const [Content, setContent] = useState('')
 
     useEffect(() => {
-        //console.log(fileList)
+        console.log(fileList)
     }, [fileList])
 
     const onSubmitHandler = (e) => {
@@ -23,7 +23,7 @@ function WritePost(props) {
             onDrop(fileList)
             return
         }else{
-            uploadPost('')
+            uploadPost([])
         }
     }
         
@@ -53,11 +53,16 @@ function WritePost(props) {
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
-        formData.append("file", files[0]);
+        
+        for(let i=0 ; i < files.length; i++){
+            formData.append(`file`, files[i].originFileObj);
+        }
 
-        axios.post('/api/post/uploadImage', formData, config)
+        await axios.post('/api/post/uploadImage', formData, config)
         .then(res=>{
             if(res.data.success){
+
+                console.log(res.data.url)
                 uploadPost(res.data.url)
             }
         })
@@ -72,11 +77,9 @@ function WritePost(props) {
         setTitle(e.target.value);
     }
 
-
-    const handleBefore = (file) => {
-        setFileList(fileList.concat([file]));
-        return false
-      }
+    const onFileChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+      };
 
     const onContentHandler = (e) =>{
         if (Content.length > 500){
@@ -99,9 +102,11 @@ function WritePost(props) {
 
                 <label>Image</label>
                 <Upload
-                listType="picture"
-                maxCount={1}
-                beforeUpload={handleBefore}
+                    listType="picture"
+                    maxCount={3}
+                    beforeUpload={()=>{return false}}
+                    multiple
+                    onChange={onFileChange}
                 >
                     <Button icon={<UploadOutlined />}>Upload</Button>
                 </Upload>

@@ -31,10 +31,10 @@ function MenuRight(props) {
         return (
             <div className="navbar_right">
                 <div className="navbar_item">
-                    <a onClick={onLoginHandler}>Login</a>
+                    <span onClick={onLoginHandler}>Login</span>
                 </div>
                 <div className="navbar_item">
-                    <a onClick={onRegisterHandler}>Register</a>
+                    <span onClick={onRegisterHandler}>Register</span>
                 </div>
             </div>
         )
@@ -42,10 +42,10 @@ function MenuRight(props) {
         return (
             <div className="navbar_right">
                 <div className="navbar_item">
-                    <a>Mypage</a>
+                    <span>Mypage</span>
                 </div>
                 <div className="navbar_item">
-                    <a onClick={onLogoutHandler}>Logout</a>
+                    <span onClick={onLogoutHandler}>Logout</span>
                 </div>
             </div>
         )

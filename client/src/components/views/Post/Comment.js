@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {
-    CloseCircleOutlined, PropertySafetyTwoTone
+    CloseCircleOutlined
   } from '@ant-design/icons';
 import axios from 'axios';
 
@@ -15,7 +15,6 @@ function Comment(props) {
         axios.post('/api/comment/deleteComment',{_id:commentId})
         .then(res=>{
             if(res.data.success){
-                console.log('댓글 삭제 완료')
                 props.deleteComment(commentId)
             }
         })
@@ -43,10 +42,10 @@ function Comment(props) {
             </div>
         </div>
         { //Reply Comments
-            props.comments.map(data => (
+            props.comments.map((data, idx) => (
                 (
                     data.replyTo && data.replyTo === props.comment._id &&
-                    <div className="comment">
+                    <div className="comment" key={idx}>
                         <span style={{marginRight:"5px"}}> ↳ </span>
                         <div className="commentMain">
                             <span className="commentWriter">{data.userId.name}</span>

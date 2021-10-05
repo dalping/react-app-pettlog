@@ -7,7 +7,7 @@ import {
     RetweetOutlined
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { Image,Popconfirm} from 'antd';
+import { Image,Popconfirm,Carousel} from 'antd';
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
@@ -119,8 +119,16 @@ function Post(props) {
 
             <div className="post">
                 <div className="photo">
-                    {props.post.filePath &&
-                        <Image width={300} height={300} alt="photo" src={`http://localhost:5000/${props.post.filePath}`}/> 
+                    {props.post.filePath.length > 0 &&
+                        <Carousel autoplay>
+                            {
+                                props.post.filePath.map((data, idx)=>(
+                                    <div key={idx}>
+                                        <Image width={300} height={300} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
+                                    </div>
+                                ))
+                            }
+                        </Carousel>
                     }  
                 </div>
                 <div className="content">

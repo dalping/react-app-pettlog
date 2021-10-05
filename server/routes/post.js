@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
   //   }
 });
 
-var upload = multer({ storage: storage }).single("file")
+var upload = multer({ storage: storage }).array("file")
 
 //=================================
 //             Post
@@ -50,7 +50,13 @@ router.post('/uploadPost', (req, res)=>{
   router.post('/uploadImage',(req, res)=>{
       upload(req, res, err => {
           if(err) return res.json({success:false, err})
-          return res.json({success:true, url:res.req.file.path, fileName: res.req.file.filename})
+
+          const filePath = []
+          for(let i=0;i<res.req.files.length;i++){
+            filePath.push(res.req.files[i].path)
+          }
+
+          return res.json({success:true, url:filePath})
       })
   })
 
