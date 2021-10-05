@@ -4,10 +4,10 @@ const { Post } = require("../models/Post");
 const { Like } = require("../models/Like");
 const { Comment } = require("../models/Comment");
 const multer = require('multer');
+const fs = require('fs')
 
 var storage = multer.diskStorage({
     destination:(req, file, cb) => {
-      console.log(file)
       cb(null, "uploads/");
     },
     filename:(req, file, cb) =>{
@@ -47,7 +47,7 @@ router.post('/uploadPost', (req, res)=>{
     })
   })
 
-  router.post('/uploadImage',(req, res)=>{
+  router.post('/uploadImage',(req, res)=> {
       upload(req, res, err => {
           if(err) return res.json({success:false, err})
 
@@ -62,22 +62,27 @@ router.post('/uploadPost', (req, res)=>{
 
   router.post('/deletePost', (req, res) => {
 
-    console.log(req.body)
-
     Post.deleteOne({_id:req.body.postId})
     .exec((err, result)=>{
       if(err) return result.status(400).json({success:false, err})
     });
     
-    Like.deleteMany(req.body)
+    Like.deleteMany({postId:req.body.postId})
     .exec((err, result)=>{
       if(err) return result.status(400).json({success:false, err})
     });
     
-    Comment.deleteMany(req.body)
+    Comment.deleteMany({postId:req.body.postId})
     .exec((err, result)=>{
       if(err) return result.status(400).json({success:false, err})
     });
+    
+    //image file delete
+    req.body.filePath.forEach( path =>{
+      fs.unlink(path, (err) => {
+        console.log(err) //파일은 정상적으로 삭제되는데 에러를 반환하는 문제
+      })
+    })
   
     res.status(200).json({success:true})
   })

@@ -47,7 +47,7 @@ function Post(props) {
     }, [])
 
     const deletePostHandler = (e) => {
-        axios.post('/api/post/deletePost',{postId:props.post._id})
+        axios.post('/api/post/deletePost',{postId:props.post._id, filePath:props.post.filePath})
         .then(res=>{
             if(res.data.success){
                 props.deletePost(props.post._id)
@@ -120,7 +120,7 @@ function Post(props) {
             <div className="post">
                 <div className="photo">
                     {props.post.filePath.length > 0 &&
-                        <Carousel autoplay>
+                        <Carousel>
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
@@ -144,7 +144,7 @@ function Post(props) {
             <div className="option">
                 <div className="comment_icon icon" onClick={showCommentHandler}>
                     {
-                        OpenComment?
+                        OpenComment && Comments.length > 0?
                         <MessageOutlined className="optionIcon" style={{color:"#47cea8"}}/>
                         :<MessageOutlined className="optionIcon"/>
                     }
@@ -163,19 +163,19 @@ function Post(props) {
             {OpenComment && Comments.length !== 0 &&  
                 <div className="comments box">
                     {
-                        Comments && Comments.map((data,idx)=>(
+                        Comments && Comments.map((data,idx)=>
                             ( !data.replyTo &&  
-                            <Comment 
-                                key={idx} 
-                                comments={Comments} 
-                                comment={data} 
-                                user={user.userData} 
-                                post={props.post} 
-                                deleteComment={deleteComment}
-                                updateComment={updateComment}
-                            />
+                                <Comment 
+                                    key={idx} 
+                                    comments={Comments} 
+                                    comment={data} 
+                                    user={user.userData} 
+                                    post={props.post} 
+                                    deleteComment={deleteComment}
+                                    updateComment={updateComment}
+                                />
                             )
-                        ))
+                        )
                     }
                 </div>
             }

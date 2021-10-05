@@ -42,7 +42,7 @@ function Comment(props) {
             </div>
         </div>
         { //Reply Comments
-            props.comments.map((data, idx) => (
+            props.comments.map((data, idx) => 
                 (
                     data.replyTo && data.replyTo === props.comment._id &&
                     <div className="comment" key={idx}>
@@ -61,7 +61,7 @@ function Comment(props) {
                         </div>
                     </div>
                 )
-            ))
+            )
         }
         {
             OpenReplyComment?
