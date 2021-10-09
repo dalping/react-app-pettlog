@@ -17,29 +17,21 @@ function MainPage(props) {
     
     //Infinite Scrolling
     useEffect(() => {
-        //한번만 실행하게 하고싶다.
-        //getPosts에 성공하면 다시 Loading을 true로 변경
-        //Post를 불러오는 중이거나
-        //더이상 불러올 포스트가 없는 경우 Loading을 false로 변경
-
         if(Loading){
             const observer = new IntersectionObserver(
                 entries => {
                     if(entries[0].isIntersecting){
-                        console.log('옵저버 실행')
                         getPosts()
                     }
                 },
                 //100%일 때 옵저버 실행
-                {threshold: 0.5 },
+                {threshold: 1 },
             );
             observer.observe(pageEnd.current)
         }
     }, [Page])
 
     const getPosts = () => {
-
-        if(Post.length === 0) return
 
         setLoading(false)
         
@@ -101,11 +93,13 @@ function MainPage(props) {
                     Posts.length === 0 &&
                     <span>표시 할 포스트가 없습니다..</span>
                 }
-                {Posts.map((data,idx)=>(
-                    <Post key={idx} post={data} deletePost={deletePost}/>
-                ))}
                 {
-                    Loading && 
+                    Posts.map((data,idx)=>(
+                        <Post key={idx} post={data} deletePost={deletePost}/>
+                    ))
+                }
+                {
+                    Loading &&
                     <div className="catchScroll" ref={pageEnd}><LoadingOutlined style={{fontSize:'24px'}}/></div>
                 }
             </div>

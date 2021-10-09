@@ -133,7 +133,14 @@ function Post(props) {
                 <div className="content">
                     <span className="title">{props.post.title}</span>
                     <span className="writer">{props.post.writer.name}</span>
-                    <div className="postContent box">{props.post.content}</div>
+                    <div className="postContent box">
+                        {props.post.content.split('\n').map((line, idx) => (
+                            <React.Fragment key={idx}>
+                                {line}
+                                <br/>
+                            </React.Fragment>
+                        ))}
+                    </div>
                     <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>

@@ -19,6 +19,16 @@ function WritePost(props) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
+        if(Title.length === 0){
+            message.error('제목을 작성해 주세요.')
+            return
+        }
+
+        if(Content.length === 0){
+            message.error('내용을 작성해 주세요.')
+            return
+        }
+
         if (fileList.length !== 0){ //올릴 이미지 파일이 있으면
             onDrop(fileList)
             return
@@ -65,7 +75,11 @@ function WritePost(props) {
             }
         })
     }
-        
+    
+    const onFileChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+      };
+   
     const onTitleHandler = (e) =>{
         if (Title.length > 30){
             alert('제목은 30자를 넘을 수 없습니다.')
@@ -75,17 +89,29 @@ function WritePost(props) {
         setTitle(e.target.value);
     }
 
-    const onFileChange = ({ fileList: newFileList }) => {
-        setFileList(newFileList);
-      };
+    const onContentHandler = (e) => {
 
-    const onContentHandler = (e) =>{
         if (Content.length > 500){
             alert('내용은 500자를 넘을 수 없습니다.')
             setContent(e.target.value.substring(0,500))
             return
         }
         setContent(e.target.value);
+    }
+
+    const beforeUpload = (file) => {
+
+        if(file.type !== 'image/jpeg' && file.type !== 'image/png'){
+            message.error('확장자 .jpg/jpeg .png 이미지 파일만 업로드 해주세요.');
+            return Upload.LIST_IGNORE;
+        }
+
+        if(file.size > 1024 * 1024){
+            message.error('1MB 이하 이미지 파일만 업로드 할 수 있습니다.');
+            return Upload.LIST_IGNORE;
+        }
+
+        return false
     }
 
     return (
@@ -102,7 +128,7 @@ function WritePost(props) {
                 <Upload
                     listType="picture"
                     maxCount={3}
-                    beforeUpload={()=>{return false}}
+                    beforeUpload={beforeUpload}
                     multiple
                     onChange={onFileChange}
                 >
