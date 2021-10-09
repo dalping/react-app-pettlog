@@ -17,6 +17,7 @@ import './Comment.css'
 function Post(props) {
     
     const user = useSelector(state => state.user_reducer)
+
     const date = props.post.createdAt
     const [Like, setLike] = useState(false)
     const [LikeCount, setLikeCount] = useState(0)
@@ -101,8 +102,8 @@ function Post(props) {
     } 
 
     return (
+        user && 
         <div className="total">
-
             {
                 user.userData._id === props.post.writer._id &&
                 <Popconfirm
@@ -177,7 +178,6 @@ function Post(props) {
                     }
                 </div>
             }
-
         </div>
     )
 }
