@@ -10,25 +10,28 @@ function MainPage(props) {
 
     const [Posts, setPosts] = useState([])
     const [Page, setPage] = useState(0)
-    const user = useSelector(state => state.user_reducer)
-    const pageEnd = useRef()
     const [Loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        getPosts()
-    }, [])
+    const user = useSelector(state => state.user_reducer)
+    const pageEnd = useRef()
     
     //Infinite Scrolling
     useEffect(() => {
+        //한번만 실행하게 하고싶다.
+        //getPosts에 성공하면 다시 Loading을 true로 변경
+        //Post를 불러오는 중이거나
+        //더이상 불러올 포스트가 없는 경우 Loading을 false로 변경
+
         if(Loading){
             const observer = new IntersectionObserver(
                 entries => {
                     if(entries[0].isIntersecting){
+                        console.log('옵저버 실행')
                         getPosts()
                     }
                 },
                 //100%일 때 옵저버 실행
-                {threshold: 1 },
+                {threshold: 0.5 },
             );
             observer.observe(pageEnd.current)
         }
@@ -36,9 +39,10 @@ function MainPage(props) {
 
     const getPosts = () => {
 
-        //더이상 표시 할 포스트 없음
-        //if(Posts.length < 3) return 
+        if(Post.length === 0) return
 
+        setLoading(false)
+        
         const variable = {
             skip:Page
         }
@@ -46,12 +50,12 @@ function MainPage(props) {
         axios.post('/api/post/getPost',variable)
         .then(res => {
             if(res.data.success){
-                const newData = res.data.posts.reverse()
+                const newData = res.data.posts
                 if(newData.length !== 0){
-                    //setLoading(true)
-                    setPosts(newData.concat(Posts))
+                    setPosts(Posts.concat(newData))
+                    setLoading(true)
                     setPage(Page + 1)
-                }else{
+                }else{ //더이상 포스트가 없음
                     setLoading(false)
                 }
             }else{
@@ -92,7 +96,7 @@ function MainPage(props) {
                 <span>쪽지</span>
                 <span onClick={viewLikePost}>하트를 누른 포스트</span>
             </div>
-            <div className="posts">
+            <div className="posts box">
                 {
                     Posts.length === 0 &&
                     <span>표시 할 포스트가 없습니다..</span>
@@ -100,7 +104,10 @@ function MainPage(props) {
                 {Posts.map((data,idx)=>(
                     <Post key={idx} post={data} deletePost={deletePost}/>
                 ))}
-                <div className="catchScroll" ref={pageEnd}><LoadingOutlined style={{fontSize:'24px'}}/></div>
+                {
+                    Loading && 
+                    <div className="catchScroll" ref={pageEnd}><LoadingOutlined style={{fontSize:'24px'}}/></div>
+                }
             </div>
         </div>
     )

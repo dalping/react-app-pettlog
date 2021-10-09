@@ -39,7 +39,7 @@ router.post('/uploadPost', (req, res)=>{
   })
 
   router.post('/getPost', (req, res) => {
-    Post.find().skip(req.body.skip * 3).limit(3)
+    Post.find().sort({"createdAt":-1}).skip(req.body.skip * 3).limit(3)
     .populate('writer')
     .exec((err, posts) => {
         if(err) return res.status(400).send(err);
