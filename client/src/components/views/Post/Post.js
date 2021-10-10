@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useRef} from 'react'
 import {
     CloseSquareOutlined,
     MessageOutlined,
@@ -23,6 +23,7 @@ function Post(props) {
     const [LikeCount, setLikeCount] = useState(0)
     const [Comments, setComments] = useState([])
     const [OpenComment, setOpenComment] = useState(false)
+    const iimg = useRef()
 
     useEffect(() => {
         //좋아요 수 불러오기 및 나의 좋아요 여부 확인
@@ -117,13 +118,13 @@ function Post(props) {
             }
 
             <div className="post">
-                <div className="photo">
+                <div className="photo" ref={iimg}>
                     {props.post.filePath.length > 0 &&
                         <Carousel>
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
-                                        <Image width={300} height={300} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
+                                        <Image className="image" style={{height:'500px', width:'500px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
                                     </div>
                                 ))
                             }

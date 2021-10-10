@@ -1,5 +1,5 @@
 .total {
-  width: 600px;
+  width: 1000px;
   /* height:360px; */
   display: flex;
   flex-direction: column;
@@ -21,42 +21,49 @@
   right: 0px;
 }
 
+.image {
+  width: 500px;
+  height: 500px;
+}
+
 .photo {
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   background-color: #98ddca;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   padding: 15px;
 }
 
 .title {
   font-style: bold;
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 .writer {
   border-bottom: 1px solid black;
   margin-bottom: 5px;
   color: gray;
-  font-size: 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-.postConent {
+.postContent {
   text-align: justify;
-  max-height: 200px;
+  max-height: 400px;
   overflow: scroll;
+  font-size: 1.3rem;
 }
 
 .date {
   text-align: right;
   color: gray;
-  font-size: 0.7rem;
+  font-size: 1.2rem;
 }
 
 .option {
@@ -81,14 +88,6 @@
 }
 
 @font-face {
-  font-family: "Cafe24SsurroundAir";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "NEXON Lv2 Gothic";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff")
     format("woff");
@@ -96,10 +95,38 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "IBMPlexSansKR-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 1023px) {
+  .total {
+    width: 600px;
+  }
+
+  .photo {
+    width: 300px;
+    height: 300px;
+  }
+
+  .content {
+    width: 300px;
+    height: 300px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .postContent {
+    font-size: 0.9rem;
+    max-height: 200px;
+  }
+
+  .writer {
+    font-size: 0.8rem;
+  }
+
+  .date {
+    font-size: 0.8rem;
+  }
 }

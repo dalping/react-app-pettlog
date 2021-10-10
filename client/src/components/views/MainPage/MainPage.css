@@ -8,7 +8,7 @@
 
 .category {
   background-color: #98ddca;
-  width: 30%;
+  width: 15%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 70%;
+  width: 85%;
   gap: 20px;
   height: 100%;
   overflow: scroll;
@@ -40,4 +40,29 @@
     format("woff");
   font-weight: normal;
   font-style: normal;
+}
+
+@media screen and (max-width: 768px) {
+  .category {
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+  }
+
+  .category span {
+    font-size: 1rem;
+  }
+
+  .mainpage {
+    flex-direction: column;
+    padding-top: 130px;
+  }
+
+  .posts {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1023px) {
 }
