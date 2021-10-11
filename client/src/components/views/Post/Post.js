@@ -12,6 +12,7 @@ import { Image,Popconfirm,Carousel,Avatar} from 'antd';
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
+import Writer from './Writer';
 import './Post.css'
 import './Comment.css'
 
@@ -24,10 +25,9 @@ function Post(props) {
     const [LikeCount, setLikeCount] = useState(0)
     const [Comments, setComments] = useState([])
     const [OpenComment, setOpenComment] = useState(false)
-    const iimg = useRef()
 
     useEffect(() => {
-        //좋아요 수 불러오기 및 나의 좋아요 여부 확인
+        //API : 좋아요 수 불러오기 및 나의 좋아요 여부 확인
         axios.post('/api/like/getLike', {postId:props.post._id})
         .then(res => {
             if(res.data.success){
@@ -40,7 +40,7 @@ function Post(props) {
             }
         })
 
-        //해당 포스트의 댓글 불러오기
+        //API : 해당 포스트의 댓글 불러오기
         axios.post('/api/comment/getComment',{postId:props.post._id})
         .then(res => {
             if(res.data.success){
@@ -49,6 +49,7 @@ function Post(props) {
         })
     }, [])
 
+    //API : 댓글 삭제
     const deletePostHandler = (e) => {
         axios.post('/api/post/deletePost',{postId:props.post._id, filePath:props.post.filePath})
         .then(res=>{
@@ -57,31 +58,22 @@ function Post(props) {
             }
         })
     }
-    
+
+    //댓글 리스트 출력
     const showCommentHandler = (e) => {
         setOpenComment(!OpenComment)
     }
     
-    const deleteComment = (deleteCommentId) => {
-        const idx = Comments.findIndex( p => p._id === deleteCommentId)
-        const newArr = [...Comments]
-        newArr.splice(idx, 1)
-        setComments(newArr)
-    }
-
-    const updateComment = (newComment) => {
-        setComments(Comments.concat(newComment))
-    }
-    
+    //API : 좋아요 추가&해제
     const onLikeHandler = (e) => {
-
+        
         const variable = {
             likeFrom :user.userData._id,
             postId:props.post._id,
         }
-
+        
         if(Like){ //좋아요 해제
-             axios.post('/api/like/unLike', variable)
+            axios.post('/api/like/unLike', variable)
             .then(res=>{
                 if(res.data.success){
                     setLike(!Like)
@@ -102,6 +94,19 @@ function Post(props) {
             })
         }
     } 
+    
+    //Comment 컴포넌트로부터 댓글 삭제 작업
+    const deleteComment = (deleteCommentId) => {
+        const idx = Comments.findIndex( data => data._id === deleteCommentId)
+        const newArr = [...Comments]
+        newArr.splice(idx, 1)
+        setComments(newArr)
+    }
+
+    //InputComment 컴포넌트로부터 댓글 추가 작업
+    const updateComment = (newComment) => {
+        setComments(Comments.concat(newComment))
+    }
 
     return (
         user && 
@@ -109,10 +114,10 @@ function Post(props) {
             {
                 (user.userData._id === props.post.writer._id || user.userData.role === 1)&&
                 <Popconfirm
-                    title="포스트를 삭제하시겠습니까?"
-                    onConfirm={deletePostHandler}
-                    okText="Yes"
-                    cancelText="No"
+                title="포스트를 삭제하시겠습니까?"
+                onConfirm={deletePostHandler}
+                okText="Yes"
+                cancelText="No"
                 >
                     <CloseSquareOutlined className="deletePostBtn"/>
                 </Popconfirm>
@@ -124,7 +129,7 @@ function Post(props) {
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
-                                        <Image className="image" style={{height:'400px', width:'400px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
+                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
                                     </div>
                                 ))
                             }
@@ -132,7 +137,7 @@ function Post(props) {
                     }  
                 </div>
                 <div className="content">
-                    <div className="contentTitle">
+                    <div className="contentHeader">
                         {
                             props.post.writer.profileImage?
                             <Avatar size={48} src={`http://localhost:5000/${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
@@ -140,10 +145,10 @@ function Post(props) {
                         }
                         <div style={{display:'flex', flexDirection:'column'}}>
                             <span className="title">{props.post.title}</span>
-                            <span className="writer">{props.post.writer.name}</span>
+                            <Writer writer={props.post.writer}/>
                         </div>
                     </div>
-                    <div className="postContent box">
+                    <div className="contentBody box">
                         {props.post.content.split('\n').map((line, idx) => (
                             <React.Fragment key={idx}>
                                 {line}

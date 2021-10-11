@@ -22,11 +22,6 @@
   z-index: 5;
 }
 
-.image {
-  width: 400px;
-  height: 400px;
-}
-
 .photo {
   width: 400px;
   height: 400px;
@@ -42,6 +37,20 @@
   position: relative;
 }
 
+.contentHeader{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.contentBody {
+  text-align: justify;
+  max-height: 280px;
+  overflow: scroll;
+  font-size: 1rem;
+}
+
 .postDate {
   position: absolute;
   bottom: 10px;
@@ -49,13 +58,6 @@
   text-align: right;
   color: gray;
   font-size: 0.9rem;
-}
-
-.contentTitle{
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
 }
 
 .title {
@@ -69,14 +71,6 @@
   font-size: 0.9rem;
   cursor: pointer;
 }
-
-.postContent {
-  text-align: justify;
-  max-height: 280px;
-  overflow: scroll;
-  font-size: 1rem;
-}
-
 
 .option {
   display: flex;
@@ -106,6 +100,15 @@
   align-items: center;
   height: 50px;
   border-bottom: 1px solid black;
+}
+
+.userInfo{
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo span{
+  cursor: pointer;
 }
 
 @font-face {

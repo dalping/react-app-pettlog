@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import {registerUser} from '../../../_actions/user_action';
 import {withRouter} from  'react-router-dom';
 import {Avatar} from 'antd';
-import { StepForwardFilled } from '@ant-design/icons';
 import axios from 'axios';
 
 function RegisterPage(props) {
@@ -16,7 +15,6 @@ function RegisterPage(props) {
     const [Name, setName] = useState("");
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
     const [File, setFile] = useState(null)
-    const [FilePath, setFilePath] = useState(null)
 
     const fileInput = useRef(null)
 
@@ -36,6 +34,7 @@ function RegisterPage(props) {
         setName(e.target.value);
     }
 
+    //API : 프로필 사진 서버에 저장 후 파일 경로 받아옴
     const onDrop = () => {
 
         const formData = new FormData();
@@ -53,6 +52,7 @@ function RegisterPage(props) {
         })
     }
 
+    // API : 가입한 회원 정보 db에 저장
     const saveDataDB = (path) => {
 
         let body = {
@@ -88,7 +88,6 @@ function RegisterPage(props) {
         }else{
             saveDataDB('')
         }
-
     }
 
     const onChange = (e) => {
