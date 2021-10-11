@@ -81,12 +81,12 @@ function MainPage(props) {
     return (
         user && 
         <div className="mainpage box">
-            <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             <div className="category">
-                <span onClick={viewMyPost}>내 포스트</span>
-                <span>구독</span>
-                <span>쪽지</span>
-                <span onClick={viewLikePost}>하트를 누른 포스트</span>
+                <span onClick={viewMyPost}>My Post</span>
+                <span>Subscribe</span>
+                <span>Message</span>
+                <span onClick={viewLikePost}>Like Post</span>
+                <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             </div>
             <div className="posts box">
                 {

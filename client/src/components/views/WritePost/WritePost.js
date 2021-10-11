@@ -101,11 +101,6 @@ function WritePost(props) {
 
     const beforeUpload = (file) => {
 
-        if(file.type !== 'image/jpeg' && file.type !== 'image/png'){
-            message.error('확장자 .jpg/jpeg .png 이미지 파일만 업로드 해주세요.');
-            return Upload.LIST_IGNORE;
-        }
-
         if(file.size > 1024 * 1024){
             message.error('1MB 이하 이미지 파일만 업로드 할 수 있습니다.');
             return Upload.LIST_IGNORE;
@@ -126,6 +121,7 @@ function WritePost(props) {
 
                 <label>Image</label>
                 <Upload
+                    accept='image/jpg,impge/png,image/jpeg'
                     listType="picture"
                     maxCount={3}
                     beforeUpload={beforeUpload}

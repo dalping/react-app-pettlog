@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 import {
-    CloseCircleOutlined
+    CloseCircleOutlined,
+    UserOutlined
   } from '@ant-design/icons';
+import { Avatar } from 'antd';
 import axios from 'axios';
+import './Comment.css'
 
 import InputReplyComment from './InputReplyComment';
 
@@ -27,12 +30,17 @@ function Comment(props) {
     return (
         <>
         <div className="comment">
+        {
+            props.comment.userId.profileImage?
+            <Avatar size={48} src={`http://localhost:5000/${props.comment.userId.profileImage}`} style={{marginRight:'10px'}} />
+            :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
+        }
             <div className="commentMain">
                 <span className="commentWriter">{props.comment.userId.name}</span>
                 <span style={{width:'100%', textAlign:'justify'}}>
                     {props.comment.comment}
                     <br/>
-                    <span className="date">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
+                    <span className="commentDate">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
                     {
                         props.user._id === props.comment.userId._id? 
                         <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(props.comment._id)}} />
@@ -46,13 +54,18 @@ function Comment(props) {
                 (
                     data.replyTo && data.replyTo === props.comment._id &&
                     <div className="comment" key={idx}>
-                        <span style={{marginRight:"5px"}}> ↳ </span>
+                        <span style={{marginRight:"10px"}}> ↳ </span>
+                        {
+                            data.userId.profileImage?
+                            <Avatar size={48} src={`http://localhost:5000/${data.userId.profileImage}`} style={{marginRight:'10px'}} />
+                            :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
+                        }
                         <div className="commentMain">
                             <span className="commentWriter">{data.userId.name}</span>
                             <span className="commentContent">
                                 {data.comment}
                                 <br/>
-                                <span className="date">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
+                                <span className="commentDate">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
                                 {
                                     data.userId._id === props.user._id &&
                                     <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(data._id)}} />

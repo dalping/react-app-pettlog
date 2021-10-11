@@ -4,10 +4,11 @@ import {
     MessageOutlined,
     HeartFilled,
     HeartOutlined,
-    RetweetOutlined
+    RetweetOutlined,
+    UserOutlined
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { Image,Popconfirm,Carousel} from 'antd';
+import { Image,Popconfirm,Carousel,Avatar} from 'antd';
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
@@ -106,7 +107,7 @@ function Post(props) {
         user && 
         <div className="total">
             {
-                user.userData._id === props.post.writer._id &&
+                (user.userData._id === props.post.writer._id || user.userData.role === 1)&&
                 <Popconfirm
                     title="포스트를 삭제하시겠습니까?"
                     onConfirm={deletePostHandler}
@@ -116,15 +117,14 @@ function Post(props) {
                     <CloseSquareOutlined className="deletePostBtn"/>
                 </Popconfirm>
             }
-
             <div className="post">
-                <div className="photo" ref={iimg}>
+                <div className="photo">
                     {props.post.filePath.length > 0 &&
                         <Carousel>
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
-                                        <Image className="image" style={{height:'500px', width:'500px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
+                                        <Image className="image" style={{height:'400px', width:'400px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
                                     </div>
                                 ))
                             }
@@ -132,8 +132,17 @@ function Post(props) {
                     }  
                 </div>
                 <div className="content">
-                    <span className="title">{props.post.title}</span>
-                    <span className="writer">{props.post.writer.name}</span>
+                    <div className="contentTitle">
+                        {
+                            props.post.writer.profileImage?
+                            <Avatar size={48} src={`http://localhost:5000/${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
+                            :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
+                        }
+                        <div style={{display:'flex', flexDirection:'column'}}>
+                            <span className="title">{props.post.title}</span>
+                            <span className="writer">{props.post.writer.name}</span>
+                        </div>
+                    </div>
                     <div className="postContent box">
                         {props.post.content.split('\n').map((line, idx) => (
                             <React.Fragment key={idx}>
@@ -142,7 +151,7 @@ function Post(props) {
                             </React.Fragment>
                         ))}
                     </div>
-                    <span className="date">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
+                    <span className="postDate">{date.substring(0,10) +' '+ date.substring(11,16)}</span>
                 </div>
             </div>
 
@@ -175,7 +184,7 @@ function Post(props) {
                                 <Comment 
                                     key={idx} 
                                     comments={Comments} 
-                                    comment={data} 
+                                    comment={data}
                                     user={user.userData} 
                                     post={props.post} 
                                     deleteComment={deleteComment}

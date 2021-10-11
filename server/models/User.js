@@ -22,6 +22,9 @@ const userSchema = mongoose.Schema({ //스키마 정의 생성자 구조만 정�
         type: String,
         maxlength: 50
     },
+    profileImage : {
+        type: String
+    },
     role: {
         type: Number,
         default: 0

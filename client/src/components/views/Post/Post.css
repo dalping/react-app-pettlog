@@ -1,5 +1,5 @@
 .total {
-  width: 1000px;
+  width: 800px;
   /* height:360px; */
   display: flex;
   flex-direction: column;
@@ -19,52 +19,64 @@
   margin: 5px;
   cursor: pointer;
   right: 0px;
+  z-index: 5;
 }
 
 .image {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 }
 
 .photo {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   background-color: #98ddca;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   padding: 15px;
+  position: relative;
+}
+
+.postDate {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  text-align: right;
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.contentTitle{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
 }
 
 .title {
   font-style: bold;
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 .writer {
-  border-bottom: 1px solid black;
   margin-bottom: 5px;
   color: gray;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
 .postContent {
   text-align: justify;
-  max-height: 400px;
+  max-height: 280px;
   overflow: scroll;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
-.date {
-  text-align: right;
-  color: gray;
-  font-size: 1.2rem;
-}
 
 .option {
   display: flex;
@@ -85,6 +97,15 @@
 
 .optionIcon {
   font-size: 25px;
+}
+
+.inputComment {
+  background-color: #98ddca;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid black;
 }
 
 @font-face {

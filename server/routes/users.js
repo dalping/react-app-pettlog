@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
+const multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination:(req, file, cb) => {
+      cb(null, "uploads/profile/");
+    },
+    filename:(req, file, cb) =>{
+      cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+var upload = multer({ storage: storage }).single("file")
 
 //=================================
 //             Users
@@ -19,7 +31,6 @@ router.get('/auth',auth,(req,res)=>{
         name: req.user.name,
         lastname: req.user.lastname,
         role: req.user.role,
-        image: req.user.image
     })
 })
 
@@ -31,6 +42,13 @@ router.post('/register',(req,res)=>{
         return res.status(200).json({
             success:true
         })
+    })
+})
+
+router.post('/uploadProfileImage',(req, res)=> {
+    upload(req, res, err => {
+        if(err) return res.json({success:false, err})
+        return res.json({success:true, url:res.req.file.path})
     })
 })
 

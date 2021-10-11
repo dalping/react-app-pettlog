@@ -34,13 +34,13 @@ function InputComment(props) {
 
     return (
         <div className="inputComment">
-            <span>{props.user.name}</span>
-            <form style={{display:'flex', width:'100%'}} onSubmit={onSubmitComment} >
+            <span style={{width:'10%'}}>{props.user.name}</span>
+            <form style={{display:'flex', width:'90%'}} onSubmit={onSubmitComment} >
                 <Input type="text" value={InputComment} onChange={inputCommentHandler}/>
-                {
+                { 
                     InputComment.length > 0 ? 
-                    <Button onClick={onSubmitComment}>작성</Button>
-                    : <Button disabled>작성</Button>
+                    <Button onClick={onSubmitComment} type='text'>작성</Button>
+                    : <Button type='text' disabled>작성</Button>
                 }
             </form>
         </div>

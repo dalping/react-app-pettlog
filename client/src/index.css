@@ -12,32 +12,6 @@ code {
     monospace;
 }
 
-.writePostBtn {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 20px;
-  right: 20px;
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
-  background-color: #98ddca;
-  font-size: 1.2rem;
-  font-weight: 500;
-  cursor: pointer;
-  color: white;
-}
-
-.inputComment {
-  background-color: #cefff1;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  height: 50px;
-  border-bottom: 1px solid black;
-}
-
 .box {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -49,5 +23,14 @@ code {
 .navbar_item span {
   font-size: 1.1rem;
   color: white;
+  cursor: pointer;
+}
+
+.profileImage{
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-color: gray;
+  margin:20px;
   cursor: pointer;
 }
