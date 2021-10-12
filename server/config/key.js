@@ -1,5 +1,7 @@
 if(process.env.NODE_ENV === 'development'){
+    //production Mode
     module.exports = require('./prod');
-}else{ //deploy한 후 : production
+}else{ 
+    //development Mode
     module.exports = require('./dev')
 }

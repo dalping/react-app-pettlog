@@ -31,6 +31,7 @@ function MainPage(props) {
         }
     }, [Page])
 
+    //API : 모든 포스트 불러오기 (5개 단위)
     const getPosts = () => {
 
         setLoading(false)
@@ -56,6 +57,7 @@ function MainPage(props) {
         })
     }
 
+    //Post컴포넌트로 부터 포스트 삭제 처리
     const deletePost = (deletePostId) => {
         const idx = Posts.findIndex( p => p._id === deletePostId)
         const newArr = [...Posts]
@@ -63,6 +65,7 @@ function MainPage(props) {
         setPosts(newArr)
     }
 
+    //API : 사용자의 포스트 불러오기
     const viewMyPost = () => {
         axios.post('/api/post/getMyPost',{writer:user.userData._id})
         .then(res => {

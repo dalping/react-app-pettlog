@@ -90,6 +90,7 @@ function RegisterPage(props) {
         }
     }
 
+    // 프로필 사진 파일 업로드 핸들러
     const onChange = (e) => {
 
         if(e.target.files[0]){
