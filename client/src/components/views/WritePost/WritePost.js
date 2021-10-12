@@ -72,6 +72,8 @@ function WritePost(props) {
         .then(res=>{
             if(res.data.success){
                 uploadPost(res.data.url)
+            }else{
+                console.log(res.data.err)
             }
         })
     }
