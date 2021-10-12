@@ -32,7 +32,7 @@ function Comment(props) {
         <div className="comment">
         {
             props.comment.userId.profileImage?
-            <Avatar size={48} src={`http://localhost:5000/${props.comment.userId.profileImage}`} style={{marginRight:'10px'}} />
+            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${props.comment.userId.profileImage}`} style={{marginRight:'10px'}} />
             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
         }
             <div className="commentMain">
@@ -57,7 +57,7 @@ function Comment(props) {
                         <span style={{marginRight:"10px"}}> ↳ </span>
                         {
                             data.userId.profileImage?
-                            <Avatar size={48} src={`http://localhost:5000/${data.userId.profileImage}`} style={{marginRight:'10px'}} />
+                            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${data.userId.profileImage}`} style={{marginRight:'10px'}} />
                             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
                         }
                         <div className="commentMain">

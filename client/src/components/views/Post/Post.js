@@ -129,7 +129,7 @@ function Post(props) {
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
-                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`http://localhost:5000/${props.post.filePath[idx]}`}/> 
+                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`https://radiant-hamlet-78297.herokuapp.com/${props.post.filePath[idx]}`}/> 
                                     </div>
                                 ))
                             }
