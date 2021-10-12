@@ -140,7 +140,7 @@ function Post(props) {
                     <div className="contentHeader">
                         {
                             props.post.writer.profileImage?
-                            <Avatar size={48} src={`http://localhost:5000/${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
+                            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
                             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
                         }
                         <div style={{display:'flex', flexDirection:'column'}}>
