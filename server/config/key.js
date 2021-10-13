@@ -1,7 +1,6 @@
-if(process.env.NODE_ENV === 'development'){
-    //development Mode
-    module.exports = require('./dev')
+if(process.env.NODE_ENV === 'production'){  
+     module.exports = require('./prod');
 }else{ 
-    //production Mode
-    module.exports = require('./prod');
+    //development Mode
+    module.exports = require('./dev');
 }

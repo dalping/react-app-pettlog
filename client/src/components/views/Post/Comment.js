@@ -6,6 +6,7 @@ import {
 import { Avatar } from 'antd';
 import axios from 'axios';
 import './Comment.css'
+import {URI} from '../../../deployURI'
 
 import InputReplyComment from './InputReplyComment';
 
@@ -57,7 +58,7 @@ function Comment(props) {
                         <span style={{marginRight:"10px"}}> ↳ </span>
                         {
                             data.userId.profileImage?
-                            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${data.userId.profileImage}`} style={{marginRight:'10px'}} />
+                            <Avatar size={48} src={`${URI}${data.userId.profileImage}`} style={{marginRight:'10px'}} />
                             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
                         }
                         <div className="commentMain">

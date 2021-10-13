@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useRef} from 'react'
+import React,{useState, useEffect} from 'react'
 import {
     CloseSquareOutlined,
     MessageOutlined,
@@ -9,6 +9,7 @@ import {
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { Image,Popconfirm,Carousel,Avatar} from 'antd';
+import {URI} from '../../../deployURI'
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
@@ -129,7 +130,7 @@ function Post(props) {
                             {
                                 props.post.filePath.map((data, idx)=>(
                                     <div key={idx}>
-                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`https://radiant-hamlet-78297.herokuapp.com/${props.post.filePath[idx]}`}/> 
+                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`${URI}${props.post.filePath[idx]}`}/> 
                                     </div>
                                 ))
                             }
@@ -140,7 +141,7 @@ function Post(props) {
                     <div className="contentHeader">
                         {
                             props.post.writer.profileImage?
-                            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
+                            <Avatar size={48} src={`${URI}${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
                             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
                         }
                         <div style={{display:'flex', flexDirection:'column'}}>
