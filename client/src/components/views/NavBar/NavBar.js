@@ -1,25 +1,40 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Navbar.css';
 import MenuRight from './MenuRight';
+import {MenuOutlined} from '@ant-design/icons';
 
 
-function NavBar() {
+function NavBar(props) {
+
+    const [OpenMenu, setOpenMenu] = useState(false)
+
+    const openMenuHandler = () => {
+        setOpenMenu(!OpenMenu)
+    }
 
     return (
-        <nav className="menu" style={{ position: 'fixed', zIndex:'10', width: '100%' }}>
-            
-                <div className="menu_logo">
-                    <a href="/">Pettlog</a>
-                </div>
-                <div className="menu_content">
-                    <div className="navbar_left">
-                        {/* <div className="navbar_item">
-                            <a href="/">Home</a>
-                        </div> */}
+        <nav className="menu" style={{ position: 'fixed', zIndex:'10', width: '100%' }}> 
+            <MenuOutlined className="openMenuIcon" onClick={openMenuHandler}/>
+            <div className="menuLogo">
+                <a href="/">Pettlog</a>
+            </div>
+            { OpenMenu && 
+                    <div className="openMenu">
+                        <div className="container">
+                            <span>My Post</span>
+                            <span>Subscribe</span>
+                            <span>Message</span>
+                            <span>Like Post</span>
+                        </div>
+                        <MenuRight/> 
                     </div>
-                    <MenuRight/>
-                    
-                
+            }
+            <div className="menuContent">
+                <div className="navbarLeft">
+                </div>
+                <div className="navbarRight">
+                    <MenuRight/> 
+                </div>
             </div>
         </nav>
     )

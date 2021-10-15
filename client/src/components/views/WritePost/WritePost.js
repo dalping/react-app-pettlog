@@ -103,8 +103,8 @@ function WritePost(props) {
 
     const beforeUpload = (file) => {
 
-        if(file.size > 1024 * 1024){
-            message.error('1MB 이하 이미지 파일만 업로드 할 수 있습니다.');
+        if(file.size > 3 * 1024 * 1024){
+            message.error('3MB 이하 이미지 파일만 업로드 할 수 있습니다.');
             return Upload.LIST_IGNORE;
         }
 
@@ -113,7 +113,7 @@ function WritePost(props) {
 
     return (
         <div style={{display:'flex', justifyContent:'center', alignItems:'center',width:'100%',height:'100vh'}}>
-            <form style={{display:'flex', flexDirection:'column', width:'30%'}}>
+            <form style={{display:'flex', flexDirection:'column', width:'70%'}}>
                 
                 <label>Title</label>
                 <Input type="text" value={Title} onChange={onTitleHandler} />

@@ -11,6 +11,7 @@
   padding: 7px 10px;
   border-top: 1px solid rgb(190, 190, 190);
   align-items: center;
+  position: relative;
 }
 
 .comment:first-child{
@@ -34,22 +35,39 @@
   text-align: justify;
 }
 
-.commentBtn {
+.commentReplyBtn {
   font-size: 0.7rem;
   color: rgb(87, 86, 86);
   cursor: pointer;
   margin-left: 5px;
 }
 
-.inputComment {
-  display: flex;
+.commentDeleteBtn{
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
-.inputComment span {
-  text-align: center;
-  width: 50px;
-  margin-right: 10px;
-  overflow: hidden;
+.inputComment {
+  display: flex;
+  background-color: #98ddca;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+.inputReplyComment{
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.inputCommentBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .commentDate {

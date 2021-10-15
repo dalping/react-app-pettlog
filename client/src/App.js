@@ -7,6 +7,7 @@ import RegisterPage from './components/views/RegisterPage/RegisterPage';
 // import MyPage from './components/views/MyPage/MyPage';
 import Auth from './hoc/auth';
 import WritePost from './components/views/WritePost/WritePost';
+import Message from './components/views/Message/Message';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/write" component={Auth(WritePost, true)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route exact path="/message" component={Auth(Message, true)} />
         </Switch>
       </div>
     </Router>

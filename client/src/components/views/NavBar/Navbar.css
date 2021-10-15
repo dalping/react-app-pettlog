@@ -18,23 +18,22 @@
   align-items: stretch;
 }
 
-.menu_logo {
+.menuLogo {
   font-family: "yg-jalnan";
   font-size: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 15px;
   height: 100%;
 }
 
-.menu_logo a {
+.menuLogo a {
   color: rgb(110, 110, 110);
   font-style: italic;
   font-weight: 1000;
 }
 
-.menu_content {
+.menuContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +41,7 @@
   height: 100%;
 }
 
-.menu_content a {
+.menuContent a {
   font-size: 1.2em;
   color: white;
 }
@@ -59,19 +58,13 @@
   padding: 15px 15px;
 }
 
-@media screen and (max-width: 768px) {
-  .menu {
-    flex-direction: column;
-  }
-
-  .menu_logo {
-    padding: 10px 0;
-  }
-
-  .menu_content {
-    flex-direction: column;
-    text-align: center;
-  }
+.openMenuIcon{
+  position: absolute;
+  color: white;
+  font-size: 1.5rem;
+  left: 13px;
+  top: 13px;
+  cursor: pointer;
 }
 
 @font-face {
@@ -96,4 +89,60 @@
     format("woff");
   font-weight: normal;
   font-style: normal;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+.openMenu{
+  display: none;
+}
+
+.openMenuIcon{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .menu {
+    flex-direction: column;
+  }
+
+  .menuLogo {
+    padding: 10px 0;
+  }
+
+  .menuContent {
+    display: none;
+  }
+
+  .openMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .openMenuIcon{
+    display: flex;
+  }
+
+  .navbar_item span{
+    font-size: 0.9rem;
+  }
+
+  .container{
+    display:flex;
+    font-size: 1.1rem;
+    border-bottom:1px solid white;
+    align-items: center;
+  }
+
+  .container span{
+    margin-bottom: 5px;
+    color: grey;
+  }
 }

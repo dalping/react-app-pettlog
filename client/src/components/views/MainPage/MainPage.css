@@ -8,7 +8,7 @@
 
 .category {
   background-color: #98ddca;
-  width: 15%;
+  width: 20vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -29,8 +29,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 50px;
+  width: 70%;
+  height: 7%;
   border-radius: 15px;
   margin-top: 20px;
   font-size: 1.5rem;
@@ -60,9 +60,7 @@
 
 @media screen and (max-width: 768px) {
   .category {
-    flex-direction: row;
-    width: 100%;
-    height: 50px;
+    display: none;
   }
 
   .category span {
@@ -70,8 +68,8 @@
   }
 
   .mainpage {
+    padding-top: 60px;
     flex-direction: column;
-    padding-top: 130px;
   }
 
   .posts {

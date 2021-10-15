@@ -112,32 +112,31 @@ function Post(props) {
     return (
         user && 
         <div className="total">
-            {
-                (user.userData._id === props.post.writer._id || user.userData.role === 1)&&
-                <Popconfirm
-                title="포스트를 삭제하시겠습니까?"
-                onConfirm={deletePostHandler}
-                okText="Yes"
-                cancelText="No"
-                >
-                    <CloseSquareOutlined className="deletePostBtn"/>
-                </Popconfirm>
-            }
             <div className="post">
-                <div className="photo">
-                    {props.post.filePath.length > 0 &&
-                        <Carousel>
-                            {
-                                props.post.filePath.map((data, idx)=>(
-                                    <div key={idx}>
-                                        <Image style={{height:'400px', width:'400px'}} alt="photo" src={`${URI}${props.post.filePath[idx]}`}/> 
-                                    </div>
-                                ))
-                            }
-                        </Carousel>
-                    }  
-                </div>
-                <div className="content">
+                {props.post.filePath.length > 0 &&
+                    <div className="photo">
+                            <Carousel>
+                                {
+                                    props.post.filePath.map((data, idx)=>(
+                                        <div key={idx}>
+                                            <img style={{width:'100%',height:'100%', objectFit:'cover'}} alt="photo" src={`${URI}${props.post.filePath[idx]}`}/> 
+                                        </div>
+                                    ))
+                                }
+                            </Carousel>
+                    </div>
+                }
+                <div className="content" style={props.post.filePath.length === 0 ? {width:'100%'} : {}}>
+                    {
+                        (user.userData._id === props.post.writer._id || user.userData.role === 1)&&
+                        <Popconfirm
+                            title="포스트를 삭제하시겠습니까?"
+                            onConfirm={deletePostHandler}
+                            okText="Yes"
+                            cancelText="No">
+                            <CloseSquareOutlined className="deletePostBtn"/>
+                        </Popconfirm>
+                    }
                     <div className="contentHeader">
                         {
                             props.post.writer.profileImage?
@@ -161,12 +160,10 @@ function Post(props) {
                 </div>
             </div>
 
-            <InputComment user={user.userData} postId={props.post._id} updateComment={updateComment}/>
-
             <div className="option">
                 <div className="comment_icon icon" onClick={showCommentHandler}>
                     {
-                        OpenComment && Comments.length > 0?
+                        OpenComment?
                         <MessageOutlined className="optionIcon" style={{color:"#47cea8"}}/>
                         :<MessageOutlined className="optionIcon"/>
                     }
@@ -182,23 +179,24 @@ function Post(props) {
                 </div>
             </div>
 
-            {OpenComment && Comments.length !== 0 &&  
+            {OpenComment &&
                 <div className="comments box">
                     {
                         Comments && Comments.map((data,idx)=>
-                            ( !data.replyTo &&  
-                                <Comment 
-                                    key={idx} 
-                                    comments={Comments} 
-                                    comment={data}
-                                    user={user.userData} 
-                                    post={props.post} 
-                                    deleteComment={deleteComment}
-                                    updateComment={updateComment}
-                                />
+                        ( !data.replyTo &&  
+                            <Comment 
+                            key={idx} 
+                            comments={Comments} 
+                            comment={data}
+                            user={user.userData} 
+                            post={props.post} 
+                            deleteComment={deleteComment}
+                            updateComment={updateComment}
+                            />
                             )
-                        )
-                    }
+                            )
+                        }
+                    <InputComment user={user.userData} postId={props.post._id} updateComment={updateComment}/>
                 </div>
             }
         </div>

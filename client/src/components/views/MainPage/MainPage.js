@@ -7,12 +7,13 @@ import {useSelector} from 'react-redux';
 import {LoadingOutlined} from '@ant-design/icons';
 
 function MainPage(props) {
-
+    
+    const user = useSelector(state => state.user_reducer)
     const [Posts, setPosts] = useState([])
     const [Page, setPage] = useState(0)
     const [Loading, setLoading] = useState(true)
+    const [PostType, setPostType] = useState(null)
 
-    const user = useSelector(state => state.user_reducer)
     const pageEnd = useRef()
     
     //Infinite Scrolling
@@ -31,13 +32,24 @@ function MainPage(props) {
         }
     }, [Page])
 
+    useEffect(() => {
+        setPosts([])
+        getPosts(PostType)
+    }, [PostType])
+
     //API : 모든 포스트 불러오기 (5개 단위)
     const getPosts = () => {
 
         setLoading(false)
         
         const variable = {
-            skip:Page
+            skip:Page,
+            findPost:null
+        }
+
+        //특정 포스트만 보고자 한다면
+        if(PostType !== null){ 
+            variable.findPost = {writer:PostType}
         }
     
         axios.post('/api/post/getPost',variable)
@@ -45,6 +57,7 @@ function MainPage(props) {
             if(res.data.success){
                 const newData = res.data.posts
                 if(newData.length !== 0){
+                    console.log(newData)
                     setPosts(Posts.concat(newData))
                     setLoading(true)
                     setPage(Page + 1)
@@ -67,14 +80,7 @@ function MainPage(props) {
 
     //API : 사용자의 포스트 불러오기
     const viewMyPost = () => {
-        axios.post('/api/post/getMyPost',{writer:user.userData._id})
-        .then(res => {
-            if(res.data.success){
-                setPosts(res.data.posts.reverse())
-            }else{
-                alert('fail to load MyPost')
-            }
-        })
+        props.history.push(`/Post/${user.userData._id}`)
     }
 
     const viewLikePost = () => {
@@ -87,7 +93,7 @@ function MainPage(props) {
             <div className="category">
                 <span onClick={viewMyPost}>My Post</span>
                 <span>Subscribe</span>
-                <span>Message</span>
+                <span onClick={()=>{props.history.push('/message')}}>Message</span>
                 <span onClick={viewLikePost}>Like Post</span>
                 <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             </div>

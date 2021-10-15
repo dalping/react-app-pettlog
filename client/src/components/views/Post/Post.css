@@ -1,7 +1,6 @@
 .total {
-  width: 800px;
-  /* height:360px; */
   display: flex;
+  width: 80%;
   flex-direction: column;
   border: 1px solid gray;
   border-radius: 5px;
@@ -12,41 +11,42 @@
 .post {
   display: flex;
   border-bottom: 1px solid black;
+  overflow: hidden;
 }
 
 .deletePostBtn {
   position: absolute;
-  margin: 5px;
   cursor: pointer;
-  right: 0px;
   z-index: 5;
+  right: 5px;
+  top:5px;
 }
 
 .photo {
-  width: 400px;
-  height: 400px;
+  width: 50%;
   background-color: #98ddca;
+  max-height: 350px;
+  overflow: hidden;
 }
 
 .content {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 400px;
-  padding: 15px;
+  padding: 1em;
   position: relative;
+  min-height: 200px;
 }
 
 .contentHeader{
   display: flex;
   align-items: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(223, 223, 223);
   margin-bottom: 10px;
 }
 
 .contentBody {
   text-align: justify;
-  max-height: 280px;
   overflow: scroll;
   font-size: 1rem;
 }
@@ -62,7 +62,7 @@
 
 .title {
   font-style: bold;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .writer {
@@ -70,6 +70,7 @@
   color: gray;
   font-size: 0.9rem;
   cursor: pointer;
+  flex-basis: auto;
 }
 
 .option {
@@ -93,15 +94,6 @@
   font-size: 25px;
 }
 
-.inputComment {
-  background-color: #98ddca;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  height: 50px;
-  border-bottom: 1px solid black;
-}
-
 .userInfo{
   display: flex;
   flex-direction: column;
@@ -119,30 +111,42 @@
   font-style: normal;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
+
 }
 
-@media screen and (max-width: 1023px) {
-  .total {
-    width: 600px;
+@media screen and (max-width: 768px) { 
+
+  .total{
+    width: 90%;
   }
 
-  .photo {
-    width: 300px;
-    height: 300px;
+  .post{
+    flex-direction: column;
   }
 
-  .content {
-    width: 300px;
-    height: 300px;
+  .photo{
+    width: 100%;
   }
 
+  .content{
+    width: 100%;
+  }
+  
+  .contentHeader{
+    padding: 5px 0px;
+  }
+
+  .contentBody{
+    font-size: 0.8rem;
+  }
+  
   .title {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 
   .postContent {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     max-height: 200px;
   }
 
@@ -150,7 +154,12 @@
     font-size: 0.8rem;
   }
 
-  .date {
+  .postDate {
     font-size: 0.8rem;
   }
+
+  .optionIcon{
+    font-size: 1.5rem;
+  }
+
 }

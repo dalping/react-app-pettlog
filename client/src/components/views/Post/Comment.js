@@ -33,7 +33,7 @@ function Comment(props) {
         <div className="comment">
         {
             props.comment.userId.profileImage?
-            <Avatar size={48} src={`https://radiant-hamlet-78297.herokuapp.com/${props.comment.userId.profileImage}`} style={{marginRight:'10px'}} />
+            <Avatar size={48} src={`${URI}${props.comment.userId.profileImage}`} style={{marginRight:'10px'}} />
             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
         }
             <div className="commentMain">
@@ -42,14 +42,24 @@ function Comment(props) {
                     {props.comment.comment}
                     <br/>
                     <span className="commentDate">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
+                    <span className="commentReplyBtn" onClick={openReplyHandler}>Reply</span>
                     {
-                        props.user._id === props.comment.userId._id? 
-                        <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(props.comment._id)}} />
-                        :<span className="commentBtn" onClick={openReplyHandler}>Reply</span>
+                        props.user._id === props.comment.userId._id &&
+                        <CloseCircleOutlined className="commentDeleteBtn" onClick={()=>{deleteCommnet(props.comment._id)}} />
                     }
                 </span>
             </div>
         </div>
+        { //Input Reply Comment
+            OpenReplyComment?
+            <InputReplyComment 
+                comment={props.comment} 
+                user={props.user} 
+                post={props.post} 
+                updateComment={props.updateComment}
+                openReplyHandler={openReplyHandler}
+            /> : null
+        }
         { //Reply Comments
             props.comments.map((data, idx) => 
                 (
@@ -69,7 +79,7 @@ function Comment(props) {
                                 <span className="commentDate">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
                                 {
                                     data.userId._id === props.user._id &&
-                                    <CloseCircleOutlined className="commentBtn" onClick={()=>{deleteCommnet(data._id)}} />
+                                    <CloseCircleOutlined className="commentDeleteBtn" onClick={()=>{deleteCommnet(data._id)}} />
                                 }
                             </span>
                         </div>
@@ -77,16 +87,7 @@ function Comment(props) {
                 )
             )
         }
-        {
-            OpenReplyComment?
-            <InputReplyComment 
-                comment={props.comment} 
-                user={props.user} 
-                post={props.post} 
-                updateComment={props.updateComment}
-                openReplyHandler={openReplyHandler}
-            /> : null
-        }
+
         </>
     )
 }

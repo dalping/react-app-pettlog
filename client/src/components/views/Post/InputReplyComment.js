@@ -35,7 +35,7 @@ function InputReplyComment(props) {
     }
 
     return (
-        <div style={{backgroundColor:'#98ddca', padding:'10px'}}>
+        <div className="inputReplyComment">
             <form style={{display:'flex', width:'100%'}} onSubmit={onSubmitReplyComment}>
                 <Input type="text" value={InputReply} onChange={InputReplyHandelr} placeholder={`@${props.comment.userId.name} 에게 댓글 달기...`}/>
                 {
