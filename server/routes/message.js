@@ -19,10 +19,9 @@ router.post('/sendMesage', (req, res) => {
 
 router.post('/getMessage', (req, res) => {
     Message.find(req.body)
-    .populate('messageFrom','messageTo')
+    .populate('messageTo')
     .exec((err, msg)=>{
         if(err) return res.status(400).send(err)
-        console.log(msg)
         res.status(200).json({success:true, msg})
     })
 })

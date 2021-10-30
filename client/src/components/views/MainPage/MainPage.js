@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useRef} from 'react'
-import {withRouter} from  'react-router-dom';
+import {withRouter, useParams} from  'react-router-dom';
 import axios from 'axios';
 import Post from '../Post/Post';
 import './MainPage.css';
@@ -9,10 +9,10 @@ import {LoadingOutlined} from '@ant-design/icons';
 function MainPage(props) {
     
     const user = useSelector(state => state.user_reducer)
+    const { postWriterId } = useParams();
     const [Posts, setPosts] = useState([])
     const [Page, setPage] = useState(0)
     const [Loading, setLoading] = useState(true)
-    const [PostType, setPostType] = useState(null)
 
     const pageEnd = useRef()
     
@@ -33,9 +33,8 @@ function MainPage(props) {
     }, [Page])
 
     useEffect(() => {
-        setPosts([])
-        getPosts(PostType)
-    }, [PostType])
+        getPosts()
+    }, [postWriterId])
 
     //API : 모든 포스트 불러오기 (5개 단위)
     const getPosts = () => {
@@ -44,12 +43,7 @@ function MainPage(props) {
         
         const variable = {
             skip:Page,
-            findPost:null
-        }
-
-        //특정 포스트만 보고자 한다면
-        if(PostType !== null){ 
-            variable.findPost = {writer:PostType}
+            userId:null
         }
     
         axios.post('/api/post/getPost',variable)
@@ -78,7 +72,7 @@ function MainPage(props) {
         setPosts(newArr)
     }
 
-    //API : 사용자의 포스트 불러오기
+    //내 포스트 페이지로 이동하기
     const viewMyPost = () => {
         props.history.push(`/Post/${user.userData._id}`)
     }
@@ -104,7 +98,8 @@ function MainPage(props) {
                 }
                 {
                     Posts.map((data,idx)=>(
-                        <Post key={idx} post={data} deletePost={deletePost}/>
+                        <Post 
+                            key={idx} post={data} deletePost={deletePost}/>
                     ))
                 }
                 {

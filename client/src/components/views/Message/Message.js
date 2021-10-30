@@ -7,7 +7,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 function Message() {
 
-    const [Messages, setMessages] = useState(null)
+    const [Messages, setMessages] = useState([])
     const [SeletedMsg, setSeletedMsg] = useState([])
     const user = useSelector(state => state.user_reducer)
 
@@ -18,6 +18,7 @@ function Message() {
         axios.post('/api/message/getMessage',{messageTo:user.userData._id})
         .then(res=>{
             if(res.data.success){
+                //console.log(res.data.msg)
                 setMessages(res.data.msg)
             }else{
                 console.log('메세지를 불러오지 못했습니다.')
@@ -26,7 +27,6 @@ function Message() {
     }, [user])
 
     useEffect(() => {
-
         console.log(SeletedMsg)
     }, [SeletedMsg])
 
@@ -34,7 +34,7 @@ function Message() {
 
     return (
         <div className="message">
-            { Messages ? 
+            { Messages.length > 0 ? 
                 <table className="messageTable">
                     <thead>
                         <tr>

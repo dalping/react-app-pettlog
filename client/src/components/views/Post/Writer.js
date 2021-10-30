@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
 import {Popover, Modal, Input, message} from 'antd'
+import { withRouter } from 'react-router'
 import axios from 'axios'
 
 function Writer(props) {
@@ -12,6 +13,11 @@ function Writer(props) {
     
     const modalVisibleHandler = () => {
         setModalVisible(!ModalVisible)
+    }
+
+    //해당 유저 포스트 페이지로 이동
+    const viewWriterPost = () => { 
+        props.history.push(`/Post/${props.writer._id}`)
     }
 
     const sendMessageHandler = () => {
@@ -36,7 +42,7 @@ function Writer(props) {
 
     const content = (
         <div className="userInfo">
-            <span>포스트 보기</span>
+            <span onClick={viewWriterPost}>포스트 보기</span>
             <span onClick={modalVisibleHandler}>쪽지 보내기</span>
         </div>
     );
@@ -57,4 +63,4 @@ function Writer(props) {
     )
 }
 
-export default Writer
+export default withRouter(Writer)
