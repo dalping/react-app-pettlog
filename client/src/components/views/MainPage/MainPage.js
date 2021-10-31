@@ -26,7 +26,7 @@ function MainPage(props) {
                     }
                 },
                 //100%일 때 옵저버 실행
-                {threshold: 1 },
+                { threshold: 0.5 },
             );
             observer.observe(pageEnd.current)
         }
