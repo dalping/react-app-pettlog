@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import './Navbar.css';
 import MenuRight from './MenuRight';
 import {MenuOutlined} from '@ant-design/icons';
-
+import {withRouter} from 'react-router-dom';
 
 function NavBar(props) {
 
@@ -40,4 +40,4 @@ function NavBar(props) {
     )
 }
 
-export default NavBar
+export default withRouter(NavBar)

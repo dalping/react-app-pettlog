@@ -81,10 +81,9 @@ function PostWriterPage(props) {
         user && 
         <div className="mainpage box">
             <div className="category">
+                <span>Home</span>
                 <span onClick={viewMyPost}>My Post</span>
-                <span>Subscribe</span>
                 <span onClick={()=>{props.history.push('/message')}}>Message</span>
-                <span onClick={viewLikePost}>Like Post</span>
                 <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             </div>
             <div className="posts box">

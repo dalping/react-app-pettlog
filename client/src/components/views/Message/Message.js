@@ -34,7 +34,7 @@ function Message() {
 
     return (
         <div className="message">
-            { Messages.length > 0 ? 
+            { Messages? 
                 <table className="messageTable">
                     <thead>
                         <tr>

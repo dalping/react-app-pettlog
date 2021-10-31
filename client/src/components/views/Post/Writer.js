@@ -20,6 +20,7 @@ function Writer(props) {
         props.history.push(`/Post/${props.writer._id}`)
     }
 
+    //API(sendMessage) : 서버에 메세지 저장
     const sendMessageHandler = () => {
 
         const variable = {
@@ -49,9 +50,13 @@ function Writer(props) {
 
     return (
         <div>
-            <Popover style={{zIndex:'0'}}placement="bottom" content={content}>
+            {
+               user.userData._id !== props.writer._id ?
+               <Popover style={{zIndex:'0'}}placement="bottom" content={content}>
                     <span className="writer">{props.writer.name}</span>
-            </Popover>
+                </Popover>
+                : <span className="writer">{props.writer.name}</span>
+            }
             <Modal title="쪽지 보내기" visible={ModalVisible} onOk={sendMessageHandler} onCancel={modalVisibleHandler}>
                 <Input.TextArea 
                     autoSize={{ minRows: 5, maxRows: 5 }}
