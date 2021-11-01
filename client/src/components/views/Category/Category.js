@@ -1,7 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import './Category.css';
 
 function Container(props) {
@@ -15,7 +14,7 @@ function Container(props) {
 
     return (
         <div className="container">
-            <Link to="/home"><span>Home</span></Link>
+            <span onClick={()=>{window.location.replace("/")}}>Home</span>
             <span onClick={viewMyPost}>My Post</span>
             <span onClick={()=>{props.history.push('/message')}}>Message</span>
         </div>
