@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/message" component={Auth(Message, true)} />
           <Route exact path="/Post/:postWriterId" component={Auth(PostWriterPage, true)} />
-          <Route path="/Home" component={Auth(MainPage, true)} />
+          <Route path="/home" component={Auth(MainPage, true)} />
           <Route path="/" component={Auth(MainPage, true)} />
         </Switch>
       </div>

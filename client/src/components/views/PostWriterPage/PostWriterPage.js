@@ -48,7 +48,6 @@ function PostWriterPage(props) {
             if(res.data.success){
                 const newData = res.data.posts
                 if(newData.length !== 0){
-                    console.log(newData)
                     setPosts(Posts.concat(newData))
                     setLoading(true)
                     setPage(Page + 1)

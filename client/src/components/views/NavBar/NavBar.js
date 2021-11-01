@@ -17,7 +17,7 @@ function NavBar(props) {
         <nav className="menu" style={{ position: 'fixed', zIndex:'10', width: '100%' }}> 
             <MenuOutlined className="openMenuIcon" onClick={openMenuHandler}/>
             <div className="menuLogo">
-                <span onClick={()=>{window.location.replace("/home")}}>Pettlog</span>
+                <span onClick={()=>{window.location.replace("/")}}>Pettlog</span>
             </div>
             { OpenMenu && 
                     <div className="openMenu">
