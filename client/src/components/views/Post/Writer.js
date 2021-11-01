@@ -43,19 +43,23 @@ function Writer(props) {
 
     const content = (
         <div className="userInfo">
-            <span onClick={viewWriterPost}>포스트 보기</span>
-            <span onClick={modalVisibleHandler}>쪽지 보내기</span>
+            {
+                user.userData._id !== props.writer._id ?   
+                    <>    
+                        <span onClick={viewWriterPost}>포스트 보기</span>
+                        <span onClick={modalVisibleHandler}>쪽지 보내기</span>
+                    </>
+                :<span onClick={viewWriterPost}>내 포스트 보기</span>
+            }      
         </div>
     );
 
     return (
         <div>
             {
-               user.userData._id !== props.writer._id ?
                <Popover style={{zIndex:'0'}}placement="bottom" content={content}>
                     <span className="writer">{props.writer.name}</span>
                 </Popover>
-                : <span className="writer">{props.writer.name}</span>
             }
             <Modal title="쪽지 보내기" visible={ModalVisible} onOk={sendMessageHandler} onCancel={modalVisibleHandler}>
                 <Input.TextArea 

@@ -62,16 +62,17 @@ function WritePost(props) {
         let formData = new FormData();
         formData.append("api_key", "992896418988878");
         formData.append("upload_preset", "ml_default");
+        formData.append('file',files[0].originFileObj)
 
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
         
-        for(let i=0 ; i < files.length; i++){
-            formData.append(`file`, files[i].originFileObj);
-        }
+        // for(let i=0 ; i < files.length; i++){
+        //     formData.append(`file`, files[i].originFileObj);
+        // }
 
-        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData);
+        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData,config);
 
         // await axios.post('/api/post/uploadImage', formData, config)
         // .then(res=>{

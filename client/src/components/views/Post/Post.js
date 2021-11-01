@@ -110,7 +110,7 @@ function Post(props) {
     }
 
     return (
-        user && 
+        user.userData._id && 
         <div className="total">
             <div className="post">
                 {props.post.filePath.length > 0 &&
