@@ -61,27 +61,21 @@ function WritePost(props) {
     const onDrop = async(files) => { //서버에 파일 업로드
         let formData = new FormData();
         formData.append("api_key", "992896418988878");
-        formData.append("upload_preset", "ml_default");
-        formData.append('file',files[0].originFileObj)
+        formData.append("upload_preset", "lxyqyrq5");
+        formData.append("timestamp", (Date.now() / 1000) | 0);
 
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
         
-        // for(let i=0 ; i < files.length; i++){
-        //     formData.append(`file`, files[i].originFileObj);
-        // }
+        for(let i=0 ; i < files.length; i++){
+            formData.append(`file`, files[i].originFileObj);
+        }
 
-        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData,config);
-
-        // await axios.post('/api/post/uploadImage', formData, config)
-        // .then(res=>{
-        //     if(res.data.success){
-        //         uploadPost(res.data.url)
-        //     }else{
-        //         console.log(res.data.err)
-        //     }
-        // })
+        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData,config)
+        .then(res=>{
+            uploadPost(res.data.url)
+        })
     }
     
     const onFileChange = ({ fileList: newFileList }) => {
@@ -131,7 +125,7 @@ function WritePost(props) {
                 <Upload
                     accept='image/jpg,impge/png,image/jpeg'
                     listType="picture"
-                    maxCount={3}
+                    maxCount={1}
                     beforeUpload={beforeUpload}
                     multiple
                     onChange={onFileChange}

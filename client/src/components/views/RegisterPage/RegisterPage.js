@@ -35,20 +35,21 @@ function RegisterPage(props) {
     }
 
     //API : 프로필 사진 서버에 저장 후 파일 경로 받아옴
-    const onDrop = () => {
+    const onDrop = async() => {
 
         const formData = new FormData();
         formData.append('file',File)
+        formData.append("api_key", "992896418988878");
+        formData.append("upload_preset", "lxyqyrq5");
+        formData.append("timestamp", (Date.now() / 1000) | 0);
 
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
 
-        axios.post('/api/users/uploadProfileImage',formData, config)
-        .then(res => {
-            if(res.data.success){
-                saveDataDB(res.data.url)
-            }
+        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData,config)
+        .then(res=>{
+            saveDataDB(res.data.url)
         })
     }
 

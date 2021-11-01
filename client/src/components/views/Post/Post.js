@@ -9,7 +9,6 @@ import {
   } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { Image,Popconfirm,Carousel,Avatar} from 'antd';
-import {URI} from '../../../deployURI'
 import axios from 'axios';
 import Comment from './Comment';
 import InputComment from './InputComment';
@@ -119,7 +118,7 @@ function Post(props) {
                                 {
                                     props.post.filePath.map((data, idx)=>(
                                         <div key={idx}>
-                                            <img style={{width:'100%',height:'100%', objectFit:'cover'}} alt="photo" src={`${URI}${props.post.filePath[idx]}`}/> 
+                                            <img style={{width:'100%',height:'100%', objectFit:'cover'}} alt="photo" src={`${props.post.filePath[idx]}`}/> 
                                         </div>
                                     ))
                                 }
@@ -140,7 +139,7 @@ function Post(props) {
                     <div className="contentHeader">
                         {
                             props.post.writer.profileImage?
-                            <Avatar size={48} src={`${URI}${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
+                            <Avatar size={48} src={`${props.post.writer.profileImage}`} style={{marginRight:'10px'}} />
                             :<Avatar size={48} icon={<UserOutlined />} style={{marginRight:'10px'}}/>
                         }
                         <div style={{display:'flex', flexDirection:'column'}}>
