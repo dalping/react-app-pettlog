@@ -60,6 +60,9 @@ function WritePost(props) {
 
     const onDrop = async(files) => { //서버에 파일 업로드
         let formData = new FormData();
+        formData.append("api_key", "992896418988878");
+        formData.append("upload_preset", "ml_default");
+
         const config = {
             header: { "Content-Type": "multipart/form-data" }
         }
@@ -68,14 +71,16 @@ function WritePost(props) {
             formData.append(`file`, files[i].originFileObj);
         }
 
-        await axios.post('/api/post/uploadImage', formData, config)
-        .then(res=>{
-            if(res.data.success){
-                uploadPost(res.data.url)
-            }else{
-                console.log(res.data.err)
-            }
-        })
+        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData);
+
+        // await axios.post('/api/post/uploadImage', formData, config)
+        // .then(res=>{
+        //     if(res.data.success){
+        //         uploadPost(res.data.url)
+        //     }else{
+        //         console.log(res.data.err)
+        //     }
+        // })
     }
     
     const onFileChange = ({ fileList: newFileList }) => {
