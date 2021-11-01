@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import {message,Input,Upload,Button} from 'antd';
+import {message,Input,Upload,Button,Spin} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
+import LoadingPage from '../LoadingPage';
 
 function WritePost(props) {
 
@@ -11,6 +12,7 @@ function WritePost(props) {
     const [fileList, setFileList] = useState([]);
     const [Title, setTitle] = useState('')
     const [Content, setContent] = useState('')
+    const [Loading, setLoading] = useState(false)
 
     useEffect(() => {
         //console.log(fileList)
@@ -19,16 +21,19 @@ function WritePost(props) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
+        
         if(Title.length === 0){
             message.error('제목을 작성해 주세요.')
             return
         }
-
+        
         if(Content.length === 0){
             message.error('내용을 작성해 주세요.')
             return
         }
 
+        setLoading(true)
+        
         if (fileList.length !== 0){ //올릴 이미지 파일이 있으면
             onDrop(fileList)
             return
@@ -113,8 +118,8 @@ function WritePost(props) {
 
     return (
         <div style={{display:'flex', justifyContent:'center', alignItems:'center',width:'100%',height:'100vh'}}>
+            {Loading && <LoadingPage/>}
             <form style={{display:'flex', flexDirection:'column', width:'70%'}}>
-                
                 <label>Title</label>
                 <Input type="text" value={Title} onChange={onTitleHandler} />
                 

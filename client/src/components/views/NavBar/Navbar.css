@@ -11,13 +11,6 @@
   font-family: "NanumSquareRound";
 }
 
-.container {
-  display: flex;
-  height: 100%;
-  justify-content: stretch;
-  align-items: stretch;
-}
-
 .menuLogo {
   font-family: "yg-jalnan";
   font-size: 1.5em;
@@ -27,7 +20,7 @@
   height: 100%;
 }
 
-.menuLogo a {
+.menuLogo span {
   color: rgb(110, 110, 110);
   font-style: italic;
   font-weight: 1000;
@@ -92,12 +85,6 @@
   font-style: normal;
 }
 
-.container{
-  display: flex;
-  flex-direction: column;
-  display: none;
-}
-
 .openMenu{
   display: none;
 }
@@ -125,6 +112,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    animation: 0.5s ease-in-out loadEffect1;
+  }
+
+  @keyframes loadEffect1 {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
   }
 
   .openMenuIcon{
@@ -140,6 +137,7 @@
     font-size: 1.1rem;
     border-bottom:1px solid white;
     align-items: center;
+    padding-bottom: 10px;
   }
 
   .container span{
@@ -147,3 +145,5 @@
     color: grey;
   }
 }
+
+

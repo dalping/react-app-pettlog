@@ -5,6 +5,7 @@ import Post from '../Post/Post';
 import './MainPage.css';
 import {useSelector} from 'react-redux';
 import {LoadingOutlined} from '@ant-design/icons';
+import Category from '../Category/Category';
 
 function MainPage(props) {
     
@@ -71,24 +72,14 @@ function MainPage(props) {
         setPosts(newArr)
     }
 
-    //내 포스트 페이지로 이동하기
-    const viewMyPost = () => {
-        props.history.push(`/Post/${user.userData._id}`)
-    }
-
-    const viewLikePost = () => {
-
-    }
-
     return (
         user && 
         <div className="mainpage box">
             <div className="category">
-                <span>Home</span>
-                <span onClick={viewMyPost}>My Post</span>
-                <span onClick={()=>{props.history.push('/message')}}>Message</span>
+                <Category/>
                 <div className="writePostBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             </div>
+            <div className="writePostMobileBtn" onClick={()=>{props.history.push('/write')}}>Write</div>
             <div className="posts box">
                 {
                     Posts.length === 0 &&

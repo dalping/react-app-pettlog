@@ -4,6 +4,7 @@ import {registerUser} from '../../../_actions/user_action';
 import {withRouter} from  'react-router-dom';
 import {Avatar} from 'antd';
 import axios from 'axios';
+import LoadingPage from '../LoadingPage';
 
 function RegisterPage(props) {
 
@@ -15,6 +16,7 @@ function RegisterPage(props) {
     const [Name, setName] = useState("");
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
     const [File, setFile] = useState(null)
+    const [Loading, setLoading] = useState(false)
 
     const fileInput = useRef(null)
 
@@ -84,6 +86,8 @@ function RegisterPage(props) {
             return alert('비밀번호가 다릅니다.'); 
         }
 
+        setLoading(true)
+
         if(File!==null){
             onDrop()
         }else{
@@ -113,6 +117,7 @@ function RegisterPage(props) {
 
     return (
         <div style={{display:'flex', justifyContent:'center', alignItems:'center',width:'100%',height:'100vh'}}>
+            {Loading && <LoadingPage/>}
             <form style={{display:'flex', flexDirection:'column'}} onSubmit={onSubmitHandler}>
                 
                 <label>Profile Image</label>

@@ -50,6 +50,23 @@
   overflow: scroll;
 }
 
+.writePostMobileBtn{
+  display: none;
+  bottom: 10px;
+  right: 10px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 10;
+  width: 70px;
+  height: 70px;
+  background-color: #98ddca;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 35px;
+  cursor: pointer;
+}
+
 @font-face {
   font-family: "Cafe24Ssurround";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
@@ -75,6 +92,10 @@
   .posts {
     margin-top: 10px;
     width: 100%;
+  }
+
+  .writePostMobileBtn{
+    display: flex;
   }
 }
 

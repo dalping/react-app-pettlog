@@ -37,7 +37,7 @@ function Comment(props) {
         }
             <div className="commentMain">
                 <span className="commentWriter">{props.comment.userId.name}</span>
-                <span style={{width:'100%', textAlign:'justify'}}>
+                <span style={{textAlign:'justify'}}>
                     {props.comment.comment}
                     <br/>
                     <span className="commentDate">{`${date.substring(0,10)} ${date.substring(11,16)}`}</span>
