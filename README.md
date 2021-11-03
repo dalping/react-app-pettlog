@@ -1,6 +1,16 @@
 # react-app-pettlog
 리액트를 활요한 반려동물 블로그
 
+[FrontEnd]
+Html/Css,Javascript,React.js
+
+[BackEnd]
+Server : Node.js Express
+DB : MongoDB
+
+[Hosting]
+heroku
+
 ===========================
 
 To-Do List
