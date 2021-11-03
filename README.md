@@ -1,5 +1,4 @@
 # react-app-pettlog
-리액트를 활요한 반려동물 블로그
 https://radiant-hamlet-78297.herokuapp.com/
 
 [FrontEnd]
@@ -72,3 +71,10 @@ Bugs
 
 2021.10.16
 * 쪽지 보내기, 쪽지함 구현
+
+2021.10.31
+* 유저별 포스트 페이지 구현
+* 반응형 UI 개선
+
+2021.11.01
+* 1차 배포
