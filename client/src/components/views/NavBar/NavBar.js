@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import './Navbar.css';
 import MenuRight from './MenuRight';
 import {MenuOutlined} from '@ant-design/icons';
@@ -8,6 +8,12 @@ import Category from '../Category/Category';
 function NavBar(props) {
 
     const [OpenMenu, setOpenMenu] = useState(false)
+
+    useEffect(() => {
+        return () => {
+            setOpenMenu(false)
+        }
+    }, [])
 
     const openMenuHandler = () => {
         setOpenMenu(!OpenMenu)

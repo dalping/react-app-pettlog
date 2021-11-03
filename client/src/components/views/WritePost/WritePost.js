@@ -5,6 +5,7 @@ import {message,Input,Upload,Button,Spin} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 import LoadingPage from '../LoadingPage';
+import {API_KEY, UPLOAD_PRESET, CLOUD_URL} from '../../../cloudinary';
 
 function WritePost(props) {
 
@@ -65,8 +66,8 @@ function WritePost(props) {
 
     const onDrop = async(files) => { //서버에 파일 업로드
         let formData = new FormData();
-        formData.append("api_key", "992896418988878");
-        formData.append("upload_preset", "lxyqyrq5");
+        formData.append("api_key", API_KEY);
+        formData.append("upload_preset", UPLOAD_PRESET);
         formData.append("timestamp", (Date.now() / 1000) | 0);
 
         const config = {
@@ -77,7 +78,7 @@ function WritePost(props) {
             formData.append(`file`, files[i].originFileObj);
         }
 
-        await axios.post('https://api.cloudinary.com/v1_1/rominicloudinary/image/upload', formData,config)
+        await axios.post(CLOUD_URL, formData, config)
         .then(res=>{
             uploadPost(res.data.url)
         })
