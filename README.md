@@ -5,8 +5,9 @@
 Html/Css,Javascript,React.js
 
 [BackEnd]
-Server : Node.js Express
-DB : MongoDB
+* Server : Node.js Express
+* DB : MongoDB
+* Stroage : Cloudinary
 
 [Hosting]
 heroku
