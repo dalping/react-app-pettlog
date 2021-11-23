@@ -15,6 +15,7 @@ import InputComment from './InputComment';
 import Writer from './Writer';
 import './Post.css'
 import './Comment.css'
+import * as Styled from '../MainPage/style';
 
 function Post(props) {
     
@@ -111,6 +112,7 @@ function Post(props) {
     return (
         user.userData._id && 
         <div className="total">
+            
             <div className="post">
                 {props.post.filePath.length > 0 &&
                     <div className="photo">
@@ -118,7 +120,7 @@ function Post(props) {
                                 {
                                     props.post.filePath.map((data, idx)=>(
                                         <div key={idx}>
-                                            <img style={{width:'100%',height:'100%', objectFit:'cover'}} alt="photo" src={`${props.post.filePath[idx]}`}/> 
+                                            <Image style={{width:'100%',height:'100%', objectFit:'cover', cursor:'pointer'}} alt="photo" src={`${props.post.filePath[idx]}`}/> 
                                         </div>
                                     ))
                                 }
@@ -169,7 +171,8 @@ function Post(props) {
                     {Comments.length}
                 </div>
                 <div className="like_icon icon" onClick={onLikeHandler}>
-                    {Like ? <HeartFilled className="optionIcon" style={{color:'red'}}/>
+                    {Like ? 
+                    <HeartFilled className="optionIcon" style={{color:'red'}}/>
                     :<HeartOutlined className="optionIcon"/>}
                     {LikeCount}
                 </div>

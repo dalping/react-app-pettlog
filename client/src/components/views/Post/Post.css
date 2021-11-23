@@ -43,6 +43,7 @@
   align-items: center;
   border-bottom: 1px solid rgb(223, 223, 223);
   margin-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .contentBody {
@@ -92,6 +93,7 @@
 
 .optionIcon {
   font-size: 25px;
+  transition: all 0.5s;
 }
 
 .userInfo{

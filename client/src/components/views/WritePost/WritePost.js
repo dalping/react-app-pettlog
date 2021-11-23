@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import {message,Input,Upload,Button,Spin} from 'antd';
+import {message,Input,Upload,Button} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 import LoadingPage from '../LoadingPage';

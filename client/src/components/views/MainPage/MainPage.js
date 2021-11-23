@@ -6,6 +6,7 @@ import './MainPage.css';
 import {useSelector} from 'react-redux';
 import {LoadingOutlined} from '@ant-design/icons';
 import Category from '../Category/Category';
+import * as Styled from './style';
 
 function MainPage(props) {
     
