@@ -146,7 +146,7 @@ function Post(props) {
                         }
                         <div style={{display:'flex', flexDirection:'column'}}>
                             <span className="title">{props.post.title}</span>
-                            <Writer writer={props.post.writer}/>
+                            <Writer writer={props.post.writer._id} name={props.post.writer.name}/>
                         </div>
                     </div>
                     <div className="contentBody box">

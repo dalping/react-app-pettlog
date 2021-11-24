@@ -4,6 +4,7 @@ import MenuRight from './MenuRight';
 import {MenuOutlined} from '@ant-design/icons';
 import {withRouter} from 'react-router-dom';
 import Category from '../Category/Category';
+import * as Styled from './style';
 
 function NavBar(props) {
 
@@ -20,17 +21,15 @@ function NavBar(props) {
     }
 
     return (
-        <nav className="menu" style={{ position: 'fixed', zIndex:'10', width: '100%' }}> 
+        <Styled.Menu className="menu" open={OpenMenu}> 
             <MenuOutlined className="openMenuIcon" onClick={openMenuHandler}/>
             <div className="menuLogo">
                 <span onClick={()=>{window.location.replace("/")}}>Pettlog</span>
             </div>
-            { OpenMenu && 
-                    <div className="openMenu">
-                        <Category/>
-                        <MenuRight/> 
-                    </div>
-            }
+            <div className="openMenu">
+                <Category />
+                <MenuRight/> 
+            </div>
             <div className="menuContent">
                 <div className="navbarLeft">
                 </div>
@@ -38,7 +37,7 @@ function NavBar(props) {
                     <MenuRight/> 
                 </div>
             </div>
-        </nav>
+        </Styled.Menu>
     )
 }
 

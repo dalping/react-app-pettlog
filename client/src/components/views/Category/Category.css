@@ -12,4 +12,9 @@
     align-items: stretch;
     font-weight: 600;
     cursor: pointer;
+    transition: transform 0.5s;
   }
+
+.container span:hover{
+  transform: scale(1.1);
+}

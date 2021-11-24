@@ -1,16 +1,5 @@
 @import "~antd/dist/antd.css";
 
-.menu {
-  padding: 0 20px;
-  /* border-bottom: solid 1px #e8e8e8; */
-  overflow: auto;
-  box-shadow: 0 0 20px #c2c2c2;
-  background-color: #98ddca;
-  display: flex;
-  align-items: center;
-  font-family: "NanumSquareRound";
-}
-
 .menuLogo {
   font-family: "yg-jalnan";
   font-size: 1.5em;
@@ -109,10 +98,6 @@
 
   .openMenu{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: 0.5s ease-in-out loadEffect1;
   }
 
   @keyframes loadEffect1 {

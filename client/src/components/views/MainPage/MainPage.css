@@ -38,6 +38,11 @@
   cursor: pointer;
   color: #98ddca;
   background-color: white;
+  transition: transform 0.5s;
+}
+
+.writePostBtn:hover{
+  transform: scale(1.1);
 }
 
 .posts {

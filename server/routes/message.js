@@ -26,4 +26,12 @@ router.post('/getMessage', (req, res) => {
     })
 })
 
+router.post('/deleteMessage', (req, res) => {
+    Message.deleteOne(req.body)
+    .exec((err, result)=>{
+        if(err) return result.status(400).json({success:false, err})
+        res.status(200).json({success:true})
+    })
+})
+
 module.exports = router;
