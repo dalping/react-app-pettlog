@@ -10,9 +10,10 @@ export const Popover = styled.div`
     border: 1px solid black;
     border-radius: 5px;
     margin-top:5px;
+    overflow: hidden;
     visibility: ${props => props.open ? 'visible' : 'hidden' };
     opacity: ${props => props.open ? '1' : '0' };
-    transition: opacity 0.5s;
+    transition: opacity 0.5s, width 0.5s, height 0.5s;
     span{
         cursor: pointer;
     }

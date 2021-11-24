@@ -41,9 +41,9 @@ function MenuRight(props) {
     }else{ //로그인 하지 않았을 경우
         return (
             <div className="navbar_right">
-                <div className="navbar_item">
+                {/* <div className="navbar_item">
                     <span>Mypage</span>
-                </div>
+                </div> */}
                 <div className="navbar_item">
                     <span onClick={onLogoutHandler}>Logout</span>
                 </div>
