@@ -11,9 +11,12 @@ export const Popover = styled.div`
     border-radius: 5px;
     margin-top:5px;
     overflow: hidden;
-    visibility: ${props => props.open ? 'visible' : 'hidden' };
-    opacity: ${props => props.open ? '1' : '0' };
-    transition: opacity 0.5s, width 0.5s, height 0.5s;
+    //width: ${props => props.open ? 'auto' : '0px' };
+    //height: ${props => props.open ? 'auto' : '0px' };
+    //opacity: ${props => props.open ? '1' : '0' };
+    //transform: ${props => props.open ? 'scale(1.0)' : 'scale(0)' };
+    //transition: all 0.5s, width 0.5s, height 0.5s, opacity 0.5s, transform 0.5s;
+
     span{
         cursor: pointer;
     }

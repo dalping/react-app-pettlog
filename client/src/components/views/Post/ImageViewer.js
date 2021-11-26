@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function ImageViewer() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div></div>;
 }
 
-export default ImageViewer
+export default ImageViewer;
