@@ -14,7 +14,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
     useEffect(() => {
       //auth()의 처리 결과가 res로 들어감
       dispatch(auth()).then((response) => {
-        console.log(response);
+        //console.log(response);
 
         // 로그인하지않은 상태
         if (!response.payload.isAuth) {

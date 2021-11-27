@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Spin, Checkbox, message, Modal, Input } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as Styled from "./style";
-import Writer from "../Post/Writer";
+import Writer from "../../Post/Writer";
 
 function Message() {
   const [Message, setMessage] = useState("");
@@ -197,8 +197,12 @@ function Message() {
         <p>쪽지를 삭제하시겠습니까?</p>
       </Modal>
       <div className="btnArea">
-        <a onClick={sendReplyMSG}>답장</a>
-        <a onClick={deleteMSG}>삭제</a>
+        <div className="btn" onClick={sendReplyMSG}>
+          답장
+        </div>
+        <div className="btn" onClick={deleteMSG}>
+          삭제
+        </div>
       </div>
     </Styled.Container>
   );

@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/views/LoginPage/LoginPage";
 import MainPage from "./components/views/MainPage/MainPage";
-import NavBar from "./components/views/NavBar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 // import MyPage from './components/views/MyPage/MyPage';
 import Auth from "./hoc/auth";
-import WritePost from "./components/views/WritePost/WritePost";
-import Message from "./components/views/Message/Message";
+import WritePost from "./components/views/WritePostPage/WritePostPage";
+import Message from "./components/views/MessagePage/MessagePage";
 import PostWriterPage from "./components/views/PostWriterPage/PostWriterPage";
 
 function App() {

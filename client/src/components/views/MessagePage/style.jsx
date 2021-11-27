@@ -15,7 +15,9 @@ export const Container = styled.div`
         width: 60%;
         justify-content: end;
         margin-top: 10px;
-        a{
+        
+        .btn{
+            cursor: pointer;
             background-color: black;
             padding: 5px 20px;
             border-radius: 6px;

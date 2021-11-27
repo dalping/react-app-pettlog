@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter, useParams } from "react-router-dom";
 import axios from "axios";
-import Post from "../Post/Post";
+import Post from "../../Post/Post";
 import "./MainPage.css";
 import { useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
-import Category from "../Category/Category";
-import * as Styled from "./style";
+import Category from "../../Category/Category";
 
 function MainPage(props) {
   const user = useSelector((state) => state.user_reducer);

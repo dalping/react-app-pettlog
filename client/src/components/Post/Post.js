@@ -8,19 +8,20 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { Image, Popconfirm, Carousel, Avatar } from "antd";
+import { Popconfirm, Avatar } from "antd";
 import axios from "axios";
 import Comment from "./Comment";
 import InputComment from "./InputComment";
 import Writer from "./Writer";
 import "./Post.css";
 import "./Comment.css";
-import * as Styled from "../MainPage/style";
+import { MakeDate } from "../../modules/MakeDate";
+import * as Styled from "./style";
+import ImageCarousel from "./ImageCarousel";
 
 function Post(props) {
   const user = useSelector((state) => state.user_reducer);
 
-  const date = props.post.createdAt;
   const [Like, setLike] = useState(false);
   const [LikeCount, setLikeCount] = useState(0);
   const [Comments, setComments] = useState([]);
@@ -116,32 +117,25 @@ function Post(props) {
 
   return (
     user.userData._id && (
-      <div className="total">
-        <div className="post">
+      <Styled.PostWrapper>
+        <Styled.PostContent>
           {props.post.filePath.length > 0 && (
-            <div className="photo">
-              <Carousel>
+            <Styled.PostPhoto>
+              <ImageCarousel images={props.post.filePath} />
+              {/* <Carousel style={{width:'100%', height:}}>
                 {props.post.filePath.map((data, idx) => (
-                  <div key={idx}>
+                  <div key={idx} style={{ width: "100%", height: "100%" }}>
                     <Image
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        cursor: "pointer",
-                      }}
+                      className="photo"
                       alt="photo"
                       src={`${props.post.filePath[idx]}`}
                     />
                   </div>
                 ))}
-              </Carousel>
-            </div>
+              </Carousel> */}
+            </Styled.PostPhoto>
           )}
-          <div
-            className="content"
-            style={props.post.filePath.length === 0 ? { width: "100%" } : {}}
-          >
+          <Styled.Content isImage={props.post.filePath.length}>
             {(user.userData._id === props.post.writer._id ||
               user.userData.role === 1) && (
               <Popconfirm
@@ -154,19 +148,21 @@ function Post(props) {
               </Popconfirm>
             )}
             <div className="contentHeader">
-              {props.post.writer.profileImage ? (
-                <Avatar
-                  size={48}
-                  src={`${props.post.writer.profileImage}`}
-                  style={{ marginRight: "10px" }}
-                />
-              ) : (
-                <Avatar
-                  size={48}
-                  icon={<UserOutlined />}
-                  style={{ marginRight: "10px" }}
-                />
-              )}
+              <div className="profileImg">
+                {props.post.writer.profileImage ? (
+                  <Avatar
+                    size={45}
+                    src={`${props.post.writer.profileImage}`}
+                    style={{ marginRight: "10px" }}
+                  />
+                ) : (
+                  <Avatar
+                    size={45}
+                    icon={<UserOutlined />}
+                    style={{ marginRight: "10px" }}
+                  />
+                )}
+              </div>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <span className="title">{props.post.title}</span>
                 <Writer
@@ -183,13 +179,11 @@ function Post(props) {
                 </React.Fragment>
               ))}
             </div>
-            <span className="postDate">
-              {date.substring(0, 10) + " " + date.substring(11, 16)}
-            </span>
-          </div>
-        </div>
+            <span className="postDate">{MakeDate(props.post.createdAt)}</span>
+          </Styled.Content>
+        </Styled.PostContent>
 
-        <div className="option">
+        <Styled.PostOption>
           <div className="comment_icon icon" onClick={showCommentHandler}>
             {OpenComment ? (
               <MessageOutlined
@@ -212,7 +206,7 @@ function Post(props) {
           <div className="share_icon icon">
             <RetweetOutlined className="optionIcon" />
           </div>
-        </div>
+        </Styled.PostOption>
 
         {OpenComment && (
           <div className="comments box">
@@ -238,7 +232,7 @@ function Post(props) {
             />
           </div>
         )}
-      </div>
+      </Styled.PostWrapper>
     )
   );
 }

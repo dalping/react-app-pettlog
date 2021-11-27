@@ -15,7 +15,7 @@ function WritePost(props) {
   const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
-    //console.log(fileList)
+    console.log(fileList);
   }, [fileList]);
 
   const onSubmitHandler = (e) => {
@@ -68,16 +68,19 @@ function WritePost(props) {
     formData.append("upload_preset", UPLOAD_PRESET);
     formData.append("timestamp", (Date.now() / 1000) | 0);
 
+    const promises = [];
+
     const config = {
       header: { "Content-Type": "multipart/form-data" },
     };
 
     for (let i = 0; i < files.length; i++) {
       formData.append(`file`, files[i].originFileObj);
+      promises.push(axios.post(CLOUD_URL, formData, config));
     }
 
-    await axios.post(CLOUD_URL, formData, config).then((res) => {
-      uploadPost(res.data.url);
+    Promise.all(promises).then((res) => {
+      uploadPost(res.map((r) => r.data.url));
     });
   };
 
@@ -139,7 +142,7 @@ function WritePost(props) {
         <Upload
           accept="image/jpg,impge/png,image/jpeg"
           listType="picture"
-          maxCount={1}
+          maxCount={3}
           beforeUpload={beforeUpload}
           multiple
           onChange={onFileChange}

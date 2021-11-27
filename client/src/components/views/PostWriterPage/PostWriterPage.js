@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter, useParams } from "react-router-dom";
 import axios from "axios";
-import Post from "../Post/Post";
+import Post from "../../Post/Post";
 import "../MainPage/MainPage.css";
 import { useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
-import Category from "../Category/Category";
+import Category from "../../Category/Category";
 
 function PostWriterPage(props) {
   const user = useSelector((state) => state.user_reducer);
@@ -65,13 +65,6 @@ function PostWriterPage(props) {
     newArr.splice(idx, 1);
     setPosts(newArr);
   };
-
-  //내 포스트 페이지로 이동하기
-  const viewMyPost = () => {
-    props.history.push(`/Post/${user.userData._id}`);
-  };
-
-  const viewLikePost = () => {};
 
   return (
     user && (

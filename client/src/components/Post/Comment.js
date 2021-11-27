@@ -3,11 +3,11 @@ import { CloseCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import axios from "axios";
 import "./Comment.css";
+import { MakeDate } from "../../modules/MakeDate";
 
 import InputReplyComment from "./InputReplyComment";
 
 function Comment(props) {
-  const date = props.comment.createdAt;
   const [OpenReplyComment, setOpenReplyComment] = useState(false);
 
   const deleteCommnet = (commentId) => {
@@ -25,28 +25,29 @@ function Comment(props) {
   return (
     <>
       <div className="comment">
-        {props.comment.userId.profileImage ? (
-          <Avatar
-            size={48}
-            src={`${props.comment.userId.profileImage}`}
-            style={{ marginRight: "10px" }}
-          />
-        ) : (
-          <Avatar
-            size={48}
-            icon={<UserOutlined />}
-            style={{ marginRight: "10px" }}
-          />
-        )}
+        <div className="profileImg">
+          {props.comment.userId.profileImage ? (
+            <Avatar
+              size={48}
+              src={`${props.comment.userId.profileImage}`}
+              style={{ marginRight: "10px" }}
+            />
+          ) : (
+            <Avatar
+              size={48}
+              icon={<UserOutlined />}
+              style={{ marginRight: "10px" }}
+            />
+          )}
+        </div>
         <div className="commentMain">
           <span className="commentWriter">{props.comment.userId.name}</span>
           <span style={{ textAlign: "justify" }}>
             {props.comment.comment}
             <br />
-            <span className="commentDate">{`${date.substring(
-              0,
-              10
-            )} ${date.substring(11, 16)}`}</span>
+            <span className="commentDate">
+              {MakeDate(props.comment.createdAt)}
+            </span>
             <span className="commentReplyBtn" onClick={openReplyHandler}>
               Reply
             </span>
@@ -81,28 +82,29 @@ function Comment(props) {
             data.replyTo === props.comment._id && (
               <div className="comment" key={idx}>
                 <span style={{ marginRight: "10px" }}> ↳ </span>
-                {data.userId.profileImage ? (
-                  <Avatar
-                    size={48}
-                    src={`${data.userId.profileImage}`}
-                    style={{ marginRight: "10px" }}
-                  />
-                ) : (
-                  <Avatar
-                    size={48}
-                    icon={<UserOutlined />}
-                    style={{ marginRight: "10px" }}
-                  />
-                )}
+                <div className="profileImg">
+                  {data.userId.profileImage ? (
+                    <Avatar
+                      size={48}
+                      src={`${data.userId.profileImage}`}
+                      style={{ marginRight: "10px" }}
+                    />
+                  ) : (
+                    <Avatar
+                      size={48}
+                      icon={<UserOutlined />}
+                      style={{ marginRight: "10px" }}
+                    />
+                  )}
+                </div>
                 <div className="commentMain">
                   <span className="commentWriter">{data.userId.name}</span>
                   <span className="commentContent">
                     {data.comment}
                     <br />
-                    <span className="commentDate">{`${date.substring(
-                      0,
-                      10
-                    )} ${date.substring(11, 16)}`}</span>
+                    <span className="commentDate">
+                      {MakeDate(props.comment.createdAt)}
+                    </span>
                     {data.userId._id === props.user._id && (
                       <CloseCircleOutlined
                         className="commentDeleteBtn"
