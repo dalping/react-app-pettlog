@@ -138,7 +138,7 @@ function WritePost(props) {
           style={{ height: "200px" }}
         />
 
-        <label>Image</label>
+        <label>Image (max:3)</label>
         <Upload
           accept="image/jpg,impge/png,image/jpeg"
           listType="picture"

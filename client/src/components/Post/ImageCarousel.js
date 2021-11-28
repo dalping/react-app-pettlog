@@ -6,10 +6,6 @@ function ImageCarousel({ images }) {
   //const [Page, setPage] = useState(0);
   const [Xpos, setXpos] = useState(0);
 
-  useEffect(() => {
-    console.log(Xpos);
-  }, [Xpos]);
-
   const BtnHandler = (pos) => {
     setXpos(Xpos + pos);
   };
@@ -34,8 +30,8 @@ function ImageCarousel({ images }) {
         </Styled.CarouselBtns>
       )}
       {images.map((data, idx) => (
-        <div className="innerDiv">
-          <img key={idx} alt="" src={data} />
+        <div className="innerDiv" key={idx}>
+          <img alt="" src={data} />
         </div>
       ))}
     </Styled.CarouselWrapper>
