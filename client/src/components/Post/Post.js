@@ -122,17 +122,6 @@ function Post(props) {
           {props.post.filePath.length > 0 && (
             <Styled.PostPhoto>
               <ImageCarousel images={props.post.filePath} />
-              {/* <Carousel style={{width:'100%', height:}}>
-                {props.post.filePath.map((data, idx) => (
-                  <div key={idx} style={{ width: "100%", height: "100%" }}>
-                    <Image
-                      className="photo"
-                      alt="photo"
-                      src={`${props.post.filePath[idx]}`}
-                    />
-                  </div>
-                ))}
-              </Carousel> */}
             </Styled.PostPhoto>
           )}
           <Styled.Content isImage={props.post.filePath.length}>

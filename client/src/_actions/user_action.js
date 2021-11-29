@@ -1,52 +1,50 @@
-import axios from 'axios';
-import {
-    LOGIN_USER,
-    REGISTER_USER,
-    AUTH_USER
-} from './types';
+import axios from "axios";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
 
-export function loginUser(dataToSubmit){
+export function loginUser(dataToSubmit) {
+  const request = axios
+    .post("/api/users/login", dataToSubmit)
+    .then((response) => response.data);
 
-    const request = axios.post('/api/users/login', dataToSubmit)
-        .then(response => response.data)
+  console.log(request); //Promise 반환
 
-    console.log(request); //Promise 반환
-
-    return { //action of reducers
-        type: LOGIN_USER,
-        payload: request 
-    }
+  return {
+    //action of reducers
+    type: LOGIN_USER,
+    payload: request,
+  };
 }
 
-export function registerUser(dataToSubmit){
+export function registerUser(dataToSubmit) {
+  console.log(dataToSubmit);
 
-    console.log(dataToSubmit)
+  const request = axios
+    .post("/api/users/register", dataToSubmit)
+    .then((response) => {
+      if (!response.data.success) {
+        console.log(response.data.err);
+      }
+      console.log("res.data");
+      console.log(response.data);
+      return response.data;
+    });
 
-    const request = axios.post('/api/users/register', dataToSubmit)
-    .then(response => {
-        if(!response.data.success){
-            console.log(response.data.err)
-        }
-        console.log('res.data'); 
-        console.log(response.data); 
-        return response.data})
+  console.log("action");
+  console.log(request);
 
-    console.log('action');
-    console.log(request);
-
-    return {
-        type: REGISTER_USER,
-        payload: request
-    }
+  return {
+    type: REGISTER_USER,
+    payload: request,
+  };
 }
 
-export function auth(){
+export function auth() {
+  const request = axios
+    .get("/api/users/auth")
+    .then((response) => response.data);
 
-    const request = axios.get('/api/users/auth')
-    .then(response => response.data)
-
-    return {
-        type: AUTH_USER,
-        payload: request
-    }
+  return {
+    type: AUTH_USER,
+    payload: request,
+  };
 }

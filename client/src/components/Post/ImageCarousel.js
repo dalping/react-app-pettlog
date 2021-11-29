@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useDispatch } from "react-redux";
 import * as Styled from "./style";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
@@ -6,8 +7,19 @@ function ImageCarousel({ images }) {
   //const [Page, setPage] = useState(0);
   const [Xpos, setXpos] = useState(0);
 
+  const dispatch = useDispatch();
+
+  const store = {
+    type: "test",
+    payload: { open: true, images: images },
+  };
+
   const BtnHandler = (pos) => {
     setXpos(Xpos + pos);
+  };
+
+  const openImageViewer = () => {
+    dispatch(store);
   };
 
   return (
@@ -31,7 +43,7 @@ function ImageCarousel({ images }) {
       )}
       {images.map((data, idx) => (
         <div className="innerDiv" key={idx}>
-          <img alt="" src={data} />
+          <img alt="" src={data} onClick={openImageViewer} />
         </div>
       ))}
     </Styled.CarouselWrapper>

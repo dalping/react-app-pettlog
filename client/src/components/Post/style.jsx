@@ -25,13 +25,6 @@ export const PostPhoto = styled.div`
     background-color: #98ddca;
     max-height: 350px;
     overflow: hidden;
-
-    .photo{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        cursor: pointer;
-    }
 `;
 
 export const Content = styled.div`
@@ -115,18 +108,21 @@ export const CarouselWrapper = styled.div`
 
     .innerDiv{
         flex:0 0 100%;
-        //width: 0 0100%;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        overflow: hidden;
+        transition: transform 0.5s;
+        transform: translateX(${props => props.Xpos+'%'});
         
         img{
-            width: 100%;
+            object-fit: cover;
             height: 100%;
-            transition: transform 0.5s;
-            transform: translateX(${props => props.Xpos+'%'});
-            cursor: pointer;
         }
     }
-
 `;
 
 export const CarouselBtns = styled.div`
