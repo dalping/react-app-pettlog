@@ -9,7 +9,7 @@ function ImageViewer() {
   const [ImageIdx, setImageIdx] = useState(0);
 
   const store = {
-    type: "test",
+    type: "OPEN_IMAGE_VIEWER",
     payload: { open: false, images: [] },
   };
 
@@ -51,7 +51,9 @@ function ImageViewer() {
             </Styled.CarouselBtns>
           )}
           <Styled.Viewer>
-            {option.images.length > 0 && <img src={option.images[ImageIdx]} />}
+            {option.images.length > 0 && (
+              <img alt="" src={option.images[ImageIdx]} />
+            )}
           </Styled.Viewer>
         </Styled.ViewerWrapper>
       )}
